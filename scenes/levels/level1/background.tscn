@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://bigyyd50bhbg7"]
+
+[ext_resource type="Texture2D" uid="uid://wat23l22wa85" path="res://assets/sprites/atlantisbackground.png" id="1_bw4gs"]
+[ext_resource type="Texture2D" uid="uid://0h62gecd870b" path="res://assets/sprites/atlantis-water-top.png" id="2_8mu8f"]
+
+[node name="Background" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+repeat_size = Vector2(744, 0)
+repeat_times = 6
+
+[node name="Atlantisbackground" type="Sprite2D" parent="Parallax2D"]
+z_index = -1
+texture_filter = 1
+scale = Vector2(1.453125, 1.453125)
+texture = ExtResource("1_bw4gs")
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+repeat_size = Vector2(744, 0)
+repeat_times = 6
+
+[node name="AtlantisWaterTop" type="Sprite2D" parent="Parallax2D2"]
+z_index = -1
+texture_filter = 1
+position = Vector2(0, -278.99997)
+scale = Vector2(1.453, 1.453)
+texture = ExtResource("2_8mu8f")

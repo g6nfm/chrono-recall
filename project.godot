@@ -20,6 +20,15 @@ config/icon="res://icon.svg"
 global="*res://scripts/player_pos_tracker.gd"
 Music="*res://scenes/music.tscn"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+
+[dotnet]
+
+project/assembly_name="firstgame"
+
 [input]
 
 jump={
