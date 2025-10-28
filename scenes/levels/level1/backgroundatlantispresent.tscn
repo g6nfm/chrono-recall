@@ -6,7 +6,7 @@
 [node name="Background" type="Node2D"]
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
-repeat_size = Vector2(744, 0)
+repeat_size = Vector2(743, 0)
 repeat_times = 10
 
 [node name="Atlantisbackground" type="Sprite2D" parent="Parallax2D"]
@@ -16,12 +16,19 @@ scale = Vector2(1.453125, 1.453125)
 texture = ExtResource("1_x3qib")
 
 [node name="Parallax2D2" type="Parallax2D" parent="."]
-repeat_size = Vector2(744, 0)
+repeat_size = Vector2(743, 0)
 repeat_times = 10
 
 [node name="AtlantisWaterTop" type="Sprite2D" parent="Parallax2D2"]
 z_index = -1
 texture_filter = 1
 position = Vector2(0, -278.99997)
+scale = Vector2(1.453, 1.453)
+texture = ExtResource("2_mnw0p")
+
+[node name="AtlantisWaterTop2" type="Sprite2D" parent="Parallax2D2"]
+z_index = -1
+texture_filter = 1
+position = Vector2(0, -358.99994)
 scale = Vector2(1.453, 1.453)
 texture = ExtResource("2_mnw0p")
