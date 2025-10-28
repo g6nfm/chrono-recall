@@ -6,9 +6,6 @@ var paused = false
 @onready var scorelabel: Label = $scorelabel
 @onready var timeshift: Control = $"../player/timeshift"
 
-func add_point():
-	score +=1
-	scorelabel.text = "you collected " + str(score) + " coins."
 
 func _process(_delta: float) -> void:
 	
