@@ -12,7 +12,7 @@ func _on_past_pressed() -> void:
 	global.x = player.position.x
 	global.y = player.position.y
 	global.changed=true
-	get_tree().change_scene_to_file("res://scenes/levels/level1/level1_past.tscn")
+	get_tree().change_scene_to_file("res://scenes/levels/level1/level1_atlantispast.tscn")
 	
 
 

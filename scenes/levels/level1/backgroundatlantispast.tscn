@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://byadpinudbdaa"]
+[gd_scene load_steps=3 format=3 uid="uid://bmudep7py4cii"]
 
 [ext_resource type="Texture2D" uid="uid://ft45cw6gi7y" path="res://assets/sprites/atlantispastbackground.png" id="1_bw4gs"]
 [ext_resource type="Texture2D" uid="uid://c2f5sf4wmbjxo" path="res://assets/sprites/atlantis-top-past-clouds.png" id="2_8mu8f"]
@@ -7,7 +7,7 @@
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 repeat_size = Vector2(744, 0)
-repeat_times = 6
+repeat_times = 10
 
 [node name="Atlantisbackground" type="Sprite2D" parent="Parallax2D"]
 z_index = -1
@@ -17,7 +17,7 @@ texture = ExtResource("1_bw4gs")
 
 [node name="Parallax2D2" type="Parallax2D" parent="."]
 repeat_size = Vector2(744, 0)
-repeat_times = 6
+repeat_times = 10
 
 [node name="AtlantisWaterTop" type="Sprite2D" parent="Parallax2D2"]
 z_index = -1
