@@ -1,0 +1,5 @@
+res://scenes/levels/level1/level1_present.tscn
+res://scenes/atlantis.tscn
+res://scenes/levels/level1/level1_atlantispast.tscn
+res://scripts/manager.gd
+res://scripts/coin.gd
