@@ -18,7 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 global="*res://scripts/player_pos_tracker.gd"
-Music="*res://scenes/music.tscn"
+Music="res://scenes/music.tscn"
+Atlantis="*res://scenes/atlantis.tscn"
 
 [display]
 

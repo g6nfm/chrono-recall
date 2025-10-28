@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqmlu7mbypuqj"]
+
+[ext_resource type="AudioStream" uid="uid://bxw2bp60j0crv" path="res://assets/music/atlantis.mp3" id="1_12hti"]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_12hti")
+autoplay = true

@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4bga8glpvmte"]
+
+[ext_resource type="Script" uid="uid://4os847ilu0dr" path="res://scenes/timeshift.gd" id="1_8jrpw"]
+[ext_resource type="FontFile" uid="uid://3levxjs607vl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_n2wtg"]
+
+[node name="timeshift" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8jrpw")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="past" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_n2wtg")
+theme_override_font_sizes/font_size = 8
+text = "PAST"
+
+[node name="present" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_n2wtg")
+theme_override_font_sizes/font_size = 8
+text = "PRESENT"
+
+[node name="future" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_n2wtg")
+theme_override_font_sizes/font_size = 8
+text = "FUTURE"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/past" to="." method="_on_past_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/present" to="." method="_on_present_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/future" to="." method="_on_future_pressed"]
