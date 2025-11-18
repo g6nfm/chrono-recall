@@ -3,8 +3,9 @@ extends Node
 var score = 0
 var paused = false
 
-@onready var scorelabel: Label = $scorelabel
+
 @onready var timeshift: Control = $"../player/timeshift"
+
 
 
 func _process(_delta: float) -> void:
