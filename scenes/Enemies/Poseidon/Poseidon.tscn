@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://1wxno81lgs0u"]
+[gd_scene load_steps=33 format=3 uid="uid://1wxno81lgs0u"]
 
 [ext_resource type="Script" uid="uid://3l73tn26ctth" path="res://scripts/poseidon.gd" id="1_7ctcc"]
 [ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="2_uu1a2"]
+[ext_resource type="PackedScene" uid="uid://ctdn0jr6x3ofd" path="res://scenes/Enemies/Poseidon/Boss_health.tscn" id="2_yvo4b"]
 [ext_resource type="Script" uid="uid://c14vhjk3i8q6y" path="res://scripts/Enemyhurtbox.gd" id="3_hm2be"]
 [ext_resource type="Texture2D" uid="uid://bf8c7r4gk4ihd" path="res://assets/sprites/Poseidon.png" id="4_yvo4b"]
 
@@ -332,6 +333,13 @@ _data = {
 collision_layer = 0
 script = ExtResource("1_7ctcc")
 
+[node name="Boss_Bar" parent="." instance=ExtResource("2_yvo4b")]
+offset_left = -196.99998
+offset_top = -452.99997
+offset_right = -196.99998
+offset_bottom = -452.99997
+scale = Vector2(20, 20)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 light_mask = 0
 position = Vector2(25, 80.31445)
@@ -391,7 +399,7 @@ position = Vector2(25, 78.62891)
 shape = SubResource("RectangleShape2D_05wi8")
 
 [node name="cooldown" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 4.2
 one_shot = true
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
