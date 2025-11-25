@@ -1,14 +1,17 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3n5mstdn4hml"]
+[gd_scene load_steps=11 format=3 uid="uid://dim1l0bn0ntft"]
 
 [ext_resource type="Script" uid="uid://b77y0m4eagxt2" path="res://scripts/archer.gd" id="1_cgghf"]
-[ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="2_qw3lm"]
+[ext_resource type="PackedScene" uid="uid://cojemwl3wpq28" path="res://scenes/hurtbox.tscn" id="2_cgghf"]
 [ext_resource type="Texture2D" uid="uid://cq0dc5gppq04s" path="res://assets/sprites/Game Boy Advance - Castlevania_ Aria of Sorrow - Enemies - Skull Archer.png" id="3_ykrau"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qm8lu"]
+size = Vector2(18.5, 33.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05wi8"]
 size = Vector2(17.5, 32.375)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qj3hu"]
-size = Vector2(22, 36.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_owgmq"]
+size = Vector2(20, 34)
 
 [sub_resource type="Animation" id="Animation_uvh2r"]
 length = 0.001
@@ -85,26 +88,32 @@ _data = {
 &"walk": SubResource("Animation_xad4x")
 }
 
-[node name="ARCHER" type="CharacterBody2D"]
+[node name="ARCHER" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 0
-collision_mask = 3
 script = ExtResource("1_cgghf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(9.25, 8.25)
+shape = SubResource("RectangleShape2D_qm8lu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
 light_mask = 0
 position = Vector2(9, 8)
 shape = SubResource("RectangleShape2D_05wi8")
 
-[node name="contacthitbox" parent="." instance=ExtResource("2_qw3lm")]
-position = Vector2(-9, -20)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="contacthitbox"]
-position = Vector2(18, 26.75)
-shape = SubResource("RectangleShape2D_qj3hu")
-
 [node name="RayCastY" type="RayCast2D" parent="."]
 position = Vector2(-7, 0)
 target_position = Vector2(0, 54)
+
+[node name="contacthurtbox" parent="." instance=ExtResource("2_cgghf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="contacthurtbox"]
+position = Vector2(9, 8)
+shape = SubResource("RectangleShape2D_owgmq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-2, 5)
@@ -120,4 +129,6 @@ libraries = {
 [node name="RayCastPlayerfinder" type="RayCast2D" parent="."]
 position = Vector2(-1, 2)
 target_position = Vector2(-56, 0)
-collision_mask = 6
+collision_mask = 3
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

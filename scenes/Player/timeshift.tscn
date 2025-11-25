@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://c4bga8glpvmte"]
+
+[ext_resource type="Script" uid="uid://4os847ilu0dr" path="res://scripts/timeshift.gd" id="1_8jrpw"]
+[ext_resource type="PackedScene" uid="uid://817qjgteet4u" path="res://addons/hp.tscn" id="2_ffh0k"]
+[ext_resource type="FontFile" uid="uid://3levxjs607vl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_n2wtg"]
+
+[node name="timeshift" type="Control" node_paths=PackedStringArray("test")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1440.0
+offset_bottom = -840.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8jrpw")
+test = NodePath("shiftmenu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HP" parent="CanvasLayer" instance=ExtResource("2_ffh0k")]
+offset_right = 65.0
+scale = Vector2(15, 15)
+
+[node name="shiftmenu" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 164.0
+offset_top = 110.0
+offset_right = 332.0
+offset_bottom = 150.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="shiftmenu"]
+layout_mode = 2
+
+[node name="past" type="Button" parent="shiftmenu/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_n2wtg")
+theme_override_font_sizes/font_size = 8
+text = "PAST"
+
+[node name="present" type="Button" parent="shiftmenu/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_n2wtg")
+theme_override_font_sizes/font_size = 8
+text = "PRESENT"
+
+[node name="future" type="Button" parent="shiftmenu/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_n2wtg")
+theme_override_font_sizes/font_size = 8
+text = "FUTURE"
+
+[connection signal="pressed" from="shiftmenu/HBoxContainer/past" to="." method="_on_past_pressed"]
+[connection signal="pressed" from="shiftmenu/HBoxContainer/present" to="." method="_on_present_pressed"]
+[connection signal="pressed" from="shiftmenu/HBoxContainer/future" to="." method="_on_future_pressed"]

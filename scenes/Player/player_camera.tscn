@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqc53ehgg231f"]
+
+[ext_resource type="Script" uid="uid://b7at6hqcwx28v" path="res://scripts/player_camera.gd" id="1_7pa0d"]
+
+[node name="Camera2D" type="Camera2D"]
+z_index = -1
+offset = Vector2(0, -4)
+zoom = Vector2(4, 4)
+process_callback = 0
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+rotation_smoothing_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("1_7pa0d")

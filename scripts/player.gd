@@ -3,34 +3,64 @@ extends CharacterBody2D
 
 const SPEED = 130.0 
 const JUMP_VELOCITY = -300.0
-var has_double_jumped = false #global boolean for double jump check
 
+var has_double_jumped=false
 const DASHSPEED = 300
 var can_dash =true
-
+var HP=global.Base_HP
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D 
+
 @onready var coyote_timer: Timer = $Coyote_timer #for better/smoother jumpingd
 @onready var dash_timer: Timer = $Dash_timer
+@onready var invuln_timer: Timer = $invuln_timer
 
-func _physics_process(delta: float) -> void:
+@onready var player: CharacterBody2D = $"."
+
+
+@onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var animation_tree: AnimationTree = $AnimationTree
+@onready var attack: Node2D = $attack
+
+@onready var bar: Control = $timeshift/CanvasLayer/HP
+
+
+func _ready() -> void:
 	
-	#handle charaecter state after shift
+	animation_tree.active=true
+	global.Player_HP=global.Player_HP
+	
+	
+func _physics_process(delta: float) -> void:
+	if global.Player_HP<=0:
+		bar.damage(HP-1)
+		Engine.time_scale=0.5
+		player.set_collision_layer_value(2,false)
+		animation_tree.get("parameters/playback").travel("death")
+		return
+	
+	if invuln_timer.is_stopped():
+		player.set_collision_layer_value(2,true)
+	else:
+		player.set_collision_layer_value(2,false)
+	# Get the input direction
+	var direction := Input.get_axis("move_left", "move_right")
+	
+
+	#handle character state after shift
 	if global.changed==true:
-		
+		HP=global.Player_HP
+		bar.set_health(HP)
 		position.x = global.x
 		position.y = global.y
-		
 		#flip the guy based on direction
-		if global.direction==false:
-			animated_sprite.flip_h=false
-		elif global.direction==true:
-			animated_sprite.flip_h=true
-		
-		has_double_jumped = global.double_jump
-		
+		direction=global.direction
+		velocity=global.velocity
+		move_and_slide()
+		has_double_jumped=global.double_jump
 		global.changed=false
-		
 	# Add the gravity.
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 		
@@ -39,18 +69,18 @@ func _physics_process(delta: float) -> void:
 		global.x = position.x
 		global.y = position.y
 		global.changed=true
-	
-	# Get the input direction
-	var direction := Input.get_axis("move_left", "move_right")
-	
+
 	#flip the guy based on direction
 	if direction > 0:
-		global.direction=false
+		global.direction=1
 		animated_sprite.flip_h=false
+		attack.scale.x=1
+		attack.position.x=19*global.direction
 	elif direction < 0:
+		global.direction=-1
 		animated_sprite.flip_h=true
-		global.direction=true
-	
+		attack.scale.x=-1
+		attack.position.x=19*global.direction
 	# Start timer for the dash state
 	if Input.is_action_just_pressed("dash"):
 		if can_dash:
@@ -60,37 +90,26 @@ func _physics_process(delta: float) -> void:
 	# Handle jumping,double jumping, and coyote time.
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or !coyote_timer.is_stopped()):
 		velocity.y = JUMP_VELOCITY
-	elif !has_double_jumped and Input.is_action_just_pressed("jump"):
+	elif has_double_jumped==false and Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_VELOCITY #can be changed via -/+ 
-			has_double_jumped = true
+			has_double_jumped=true
 			global.double_jump = true
 			
 	
-	#play dash animation if in dash state(dash timer running) and moving
-	if !dash_timer.is_stopped() and direction:
-		animated_sprite.play("dash")
-		
-	#handle other animations and player state.
+	
+
 	elif is_on_floor():
-		has_double_jumped = false
+		has_double_jumped=false
 		global.double_jump = false
 		can_dash=true
-	#if no input, play idle
-		if direction == 0:
-			animated_sprite.play("idle")
-		else :
-	#else the player is moving so play run
-			animated_sprite.play("run")
+		
+		
 	
-	#since the player state updates prior to this, double jump does not need to check is_on_floor
-	elif has_double_jumped :
-		animated_sprite.play("speen")
-	#currently the only other animation so play by default
-	else:
-		animated_sprite.play("jump")
-	
+		
+		
+		
 	#if direction has a direction! and magnatude!
-	if !dash_timer.is_stopped() and direction:
+	if !dash_timer.is_stopped() and direction:	
 		velocity.x=DASHSPEED*direction
 		velocity.y=0
 	#need to to tweak but it works
@@ -100,9 +119,34 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	#coyote time 
 	var was_on_floor=is_on_floor()
+	#connect direction to movement animation tree
+	animation_tree.set("parameters/Move/blend_position",direction)
+	if HP!=global.Player_HP:
+		
+			animation_tree.get("parameters/playback").travel("Hurt")
+			has_double_jumped=false
+			
+			bar.damage(HP-1)
+			HP=global.Player_HP
+			
+	global.velocity=velocity
 	move_and_slide()
 	
-	#
+	
 	if was_on_floor && !is_on_floor():
 		coyote_timer.start()
- 
+	
+func knockback():
+	
+	invuln_timer.start()
+	
+	if global.hitx>position.x:
+		velocity=Vector2(-10000,-100)
+		
+	else:
+		velocity=Vector2(10000,-100)
+		
+	move_and_slide()
+func died():
+	global.start_over()
+	

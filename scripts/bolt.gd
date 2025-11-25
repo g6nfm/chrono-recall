@@ -1,13 +1,13 @@
 extends Area2D
 
-@export var speed: float = 70
+@export var speed: float = 100
 var velocity: Vector2 = Vector2.ZERO
 @onready var timer: Timer = $Timer
 
 
 
 # Call this function immediately after instancing the arrow to set its trajectory!
-func setup_arrow(target_position: Vector2):
+func setup_bolt(target_position: Vector2):
 	
 	velocity = (target_position - global_position).normalized() * speed
 	rotation = velocity.angle()
