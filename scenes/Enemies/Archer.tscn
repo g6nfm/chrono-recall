@@ -15,6 +15,7 @@ size = Vector2(17.5, 32.375)
 size = Vector2(20, 34)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k83v"]
+resource_local_to_scene = true
 shader = ExtResource("1_8k83v")
 shader_parameter/flash_amount = 0.0
 

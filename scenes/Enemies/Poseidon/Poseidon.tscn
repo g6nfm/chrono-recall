@@ -20,6 +20,7 @@ size = Vector2(349.75, 862)
 size = Vector2(356, 864.75)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0fxpt"]
+resource_local_to_scene = true
 shader = ExtResource("5_ey617")
 shader_parameter/flash_amount = 0.0
 
