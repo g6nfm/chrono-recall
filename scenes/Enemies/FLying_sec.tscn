@@ -1,5 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://dfx06g431ym8h"]
+[gd_scene load_steps=26 format=3 uid="uid://dfx06g431ym8h"]
 
+[ext_resource type="Shader" uid="uid://bit2te5e0yfqh" path="res://scripts/Flash.gdshader" id="1_n3a6s"]
 [ext_resource type="Script" uid="uid://blpr22y5dbw0d" path="res://scripts/flying_sec.gd" id="1_pgmig"]
 [ext_resource type="PackedScene" uid="uid://cojemwl3wpq28" path="res://scenes/hurtbox.tscn" id="2_n3a6s"]
 [ext_resource type="Texture2D" uid="uid://gg2pdt8c6c6a" path="res://assets/sprites/Flying_tazer.png" id="2_skm0b"]
@@ -12,6 +13,10 @@ size = Vector2(266.75, 505.1875)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owgmq"]
 size = Vector2(270, 509.75)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n3a6s"]
+shader = ExtResource("1_n3a6s")
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_skm0b"]
 atlas = ExtResource("2_skm0b")
@@ -245,6 +250,7 @@ shape = SubResource("RectangleShape2D_05wi8")
 shape = SubResource("RectangleShape2D_owgmq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_n3a6s")
 sprite_frames = SubResource("SpriteFrames_dt8hy")
 animation = &"new_animation"
 

@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://d02sqtn51fmlg"]
+[gd_scene load_steps=15 format=3 uid="uid://d02sqtn51fmlg"]
 
 [ext_resource type="Script" uid="uid://btfyvsvew7gy3" path="res://scripts/spear.gd" id="1_qj3hu"]
 [ext_resource type="Texture2D" uid="uid://cgiarctg5wh2p" path="res://assets/sprites/DS _ DSi - Castlevania_ Order of Ecclesia - Enemies - Spear Guard.png" id="2_aelh5"]
 [ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="2_qw3lm"]
 [ext_resource type="Script" uid="uid://c14vhjk3i8q6y" path="res://scripts/Enemyhurtbox.gd" id="3_sa1hk"]
+[ext_resource type="Shader" uid="uid://bit2te5e0yfqh" path="res://scripts/Flash.gdshader" id="4_qlj30"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05wi8"]
 size = Vector2(30.5, 40.625)
@@ -16,6 +17,10 @@ size = Vector2(45, 20.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ob1wc"]
 size = Vector2(44.5, 25)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nx1u4"]
+shader = ExtResource("4_qlj30")
+shader_parameter/flash_amount = 0.0
 
 [sub_resource type="Animation" id="Animation_uvh2r"]
 length = 0.001
@@ -137,6 +142,7 @@ position = Vector2(0.25, 2.5)
 shape = SubResource("RectangleShape2D_ob1wc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_nx1u4")
 texture = ExtResource("2_aelh5")
 hframes = 2
 vframes = 4
