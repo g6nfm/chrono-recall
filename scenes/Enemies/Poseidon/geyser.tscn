@@ -1,17 +1,66 @@
-[gd_scene load_steps=18 format=3 uid="uid://dcn5twi4r3hm6"]
+[gd_scene load_steps=19 format=3 uid="uid://dcn5twi4r3hm6"]
 
 [ext_resource type="Script" uid="uid://dueh0lpu2fe3c" path="res://scripts/geyser.gd" id="1_s7pqs"]
 [ext_resource type="PackedScene" uid="uid://cojemwl3wpq28" path="res://scenes/hurtbox.tscn" id="2_e42as"]
 [ext_resource type="Texture2D" uid="uid://p5ko6o37b5wf" path="res://assets/sprites/geyser.png" id="3_e42as"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_511kt"]
-size = Vector2(55.999992, 71.5)
+size = Vector2(55.999992, 22.857157)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1mir"]
-size = Vector2(55.999996, 71.5)
+size = Vector2(57.500015, 25.714306)
 
 [sub_resource type="Animation" id="Animation_4a768"]
 resource_name = "Geyser"
+length = 1.8750125
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875, 1, 1.125, 1.25, 1.375, 1.5, 1.625, 1.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 1, 8, 8, 2, 3, 4, 5, 4, 5, 6, 7, 8]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.875, 1.5, 1.875),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"hit"
+}, {
+"args": [],
+"method": &"end_of_hit"
+}, {
+"args": [],
+"method": &"done"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_s7pqs"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -19,16 +68,37 @@ tracks/0/path = NodePath(".:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": []
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_e2xdq"]
 _data = {
-&"Geyser": SubResource("Animation_4a768")
+&"Geyser": SubResource("Animation_4a768"),
+&"RESET": SubResource("Animation_s7pqs")
 }
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xqpml"]
+atlas = ExtResource("3_e42as")
+region = Rect2(350, 0, 50, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcjl1"]
+atlas = ExtResource("3_e42as")
+region = Rect2(400, 0, 50, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yknlm"]
 atlas = ExtResource("3_e42as")
@@ -58,17 +128,15 @@ region = Rect2(250, 0, 50, 64)
 atlas = ExtResource("3_e42as")
 region = Rect2(300, 0, 50, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xqpml"]
-atlas = ExtResource("3_e42as")
-region = Rect2(350, 0, 50, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dcjl1"]
-atlas = ExtResource("3_e42as")
-region = Rect2(400, 0, 50, 64)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_6jsqe"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xqpml")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcjl1")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yknlm")
 }, {
@@ -89,20 +157,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ljjrb")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xqpml")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dcjl1")
 }],
-"loop": true,
+"loop": false,
 "name": &"default",
 "speed": 8.0
 }]
 
 [node name="Geyser" type="Area2D" groups=["killzone"]]
-scale = Vector2(0.8, 0.8)
 collision_layer = 0
 collision_mask = 3
 script = ExtResource("1_s7pqs")
@@ -111,13 +172,15 @@ script = ExtResource("1_s7pqs")
 rotation = -3.1415925
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
-position = Vector2(1.7500015, -2.000004)
+position = Vector2(-1.351024e-06, -4.9999914)
 rotation = 1.5707964
+scale = Vector2(0.9999992, 0.9999992)
 shape = SubResource("RectangleShape2D_511kt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.749999, 2.0000002)
+position = Vector2(1.0217938e-06, 4.999992)
 rotation = 1.5707964
+scale = Vector2(0.99999905, 0.99999905)
 shape = SubResource("RectangleShape2D_o1mir")
 
 [node name="Timer" type="Timer" parent="."]
@@ -129,13 +192,13 @@ root_node = NodePath("../AnimatedSprite2D")
 libraries = {
 &"": SubResource("AnimationLibrary_e2xdq")
 }
+speed_scale = 0.7
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 1.2499999)
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_6jsqe")
-autoplay = "default"
-frame_progress = 0.21435761
+frame = 1
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

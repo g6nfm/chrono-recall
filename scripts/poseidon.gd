@@ -9,6 +9,7 @@ var rng = RandomNumberGenerator.new()
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 var WaveScene = preload("res://scenes/Enemies/Poseidon/Wave.tscn")
+var GeyserScene = preload("res://scenes/Enemies/Poseidon/geyser.tscn")
 
 @export var enemy_id : String = ""
 @export var scene_name : String
@@ -47,17 +48,9 @@ func _physics_process(_delta: float) -> void:
 		if coin==1:
 			animation_player.play("Wave")
 		else:
-			animation_player.play("Wave")
+			animation_player.play("Geyser")
 	
 
-
-	
-	
-	
-
-	
-	
-	
 func wave():
 	
 	var Wave = WaveScene.instantiate()
@@ -66,8 +59,14 @@ func wave():
 	Wave.global_position.y+=12
 	
 	
-func geyser():
-	attackhitbox.monitoring = false
+func Geyser():
+	for n in range(1,8):
+		var geyser = GeyserScene.instantiate()
+		get_tree().current_scene.add_child(geyser)
+		geyser.global_position = playerdetector.global_position
+		geyser.global_position.y+=5
+		
+		geyser.global_position.x+=-40*n-(rng.randi_range(0,30))
 func Idle():
 	animation_player.play("Idle")
 	cooldown.start()

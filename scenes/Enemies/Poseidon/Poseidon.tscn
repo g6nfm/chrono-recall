@@ -172,6 +172,33 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4]
 }
 
+[sub_resource type="Animation" id="Animation_meu11"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Slam"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
 [sub_resource type="Animation" id="Animation_0fxpt"]
 resource_name = "Slash"
 length = 0.50000334
@@ -198,61 +225,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(),
 "update": 1,
 "values": []
-}
-
-[sub_resource type="Animation" id="Animation_xfi2y"]
-resource_name = "Geyser"
-length = 0.36667
-step = 0.016666668
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Slam"]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"values": []
-}
-
-[sub_resource type="Animation" id="Animation_meu11"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"Slam"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
 }
 
 [sub_resource type="Animation" id="Animation_7ctcc"]
@@ -301,9 +273,55 @@ tracks/2/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 }
 
+[sub_resource type="Animation" id="Animation_yvo4b"]
+resource_name = "Geyser"
+length = 0.36667
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Slam"]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.36666667),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"Geyser"
+}, {
+"args": [],
+"method": &"Idle"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.1, 0.13333334, 0.16666667, 0.2, 0.23333333, 0.26666668, 0.3, 0.33333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xad4x"]
 _data = {
-&"Geyser": SubResource("Animation_xfi2y"),
+&"Geyser": SubResource("Animation_yvo4b"),
 &"Idle": SubResource("Animation_ey617"),
 &"RESET": SubResource("Animation_meu11"),
 &"Slash": SubResource("Animation_0fxpt"),
@@ -373,7 +391,7 @@ position = Vector2(25, 78.62891)
 shape = SubResource("RectangleShape2D_05wi8")
 
 [node name="cooldown" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 4.0
 one_shot = true
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
