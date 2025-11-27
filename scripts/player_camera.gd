@@ -15,7 +15,7 @@ func _ready():
 	last_hp = global.Player_HP
 	position.x=0
 	position.y=0
-	await get_tree().create_timer(0.05).timeout
+	await get_tree().create_timer(0.5).timeout
 	position_smoothing_enabled = true
 	rotation_smoothing_enabled = true 
 	limit_smoothed=true

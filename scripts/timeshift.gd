@@ -12,23 +12,22 @@ extends Control
 func shifthide():
 	test.visible = !test.visible
 
-func _on_past_pressed() -> void:
+func _on_past_pressed() -> void:	
 	manager.display()
 	global.x = player.position.x
-	
 	global.y = player.position.y
-	
 	global.changed=true
-	get_tree().change_scene_to_file("res://scenes/levels/level1/level1_atlantispast.tscn")
+	Transition.change_level("res://scenes/levels/level1/level1_atlantispast.tscn")
 	
 
 
 func _on_present_pressed() -> void:
 	manager.display()
-	global.x = player.position.x
-	global.y = player.position.y
+	global.x = player.global_position.x
+	global.y = player.global_position.y
 	global.changed=true
-	get_tree().change_scene_to_file("res://scenes/levels/level1/level1_present.tscn")
+	
+	Transition.change_level("res://scenes/levels/level1/level1_present.tscn")
 
 
 func _on_future_pressed() -> void:
@@ -36,5 +35,5 @@ func _on_future_pressed() -> void:
 	global.x = player.position.x
 	global.y = player.position.y
 	global.changed=true
-	get_tree().change_scene_to_file( "res://scenes/levels/level1/level1_future.tscn")
+	Transition.change_level( "res://scenes/levels/level1/level1_future.tscn")
 	

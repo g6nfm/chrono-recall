@@ -141,10 +141,10 @@ func knockback():
 	invuln_timer.start()
 	
 	if global.hitx>position.x:
-		velocity=Vector2(-10000,-100)
+		velocity=Vector2(-500,-100)
 		
 	else:
-		velocity=Vector2(10000,-100)
+		velocity=Vector2(500,-100)
 		
 	move_and_slide()
 func died():

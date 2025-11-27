@@ -22,17 +22,18 @@ func _process(_delta: float) -> void:
 		timeshift._on_future_pressed()
 		
 	if Input.is_action_just_pressed("timeshift_menu"):
+		
 		display()
-	
+		
 
 func display():
 	
 	paused=!paused
 	if paused==false:
 		timeshift.shifthide()
-		Engine.time_scale=1.0
+		get_tree().paused = false
 	elif paused==true:
 		timeshift.shifthide()
-		Engine.time_scale=0.0
+		get_tree().paused = true
 	
 	
