@@ -5,7 +5,8 @@ var paused = false
 
 
 @onready var timeshift: Control = $"../player/timeshift"
-@onready var shiftmenu: MarginContainer = $"../player/timeshift/shiftmenu"
+@onready var shiftmenu: MarginContainer = $"../player/timeshift/CanvasLayer/shiftmenu"
+
 
 
 

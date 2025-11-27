@@ -2,7 +2,7 @@ extends Control
 
 @export var test: Control
 @onready var manager: Node = $"../../Manager"
-@onready var shiftmenu: MarginContainer = $shiftmenu
+@onready var shiftmenu: MarginContainer = $CanvasLayer/shiftmenu
 @onready var hp: MarginContainer = $CanvasLayer/HP
 
 

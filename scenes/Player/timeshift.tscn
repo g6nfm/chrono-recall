@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://3levxjs607vl" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_n2wtg"]
 
 [node name="timeshift" type="Control" node_paths=PackedStringArray("test")]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +15,7 @@ offset_bottom = -840.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8jrpw")
-test = NodePath("shiftmenu")
+test = NodePath("CanvasLayer/shiftmenu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -22,35 +23,40 @@ test = NodePath("shiftmenu")
 offset_right = 65.0
 scale = Vector2(15, 15)
 
-[node name="shiftmenu" type="MarginContainer" parent="."]
+[node name="shiftmenu" type="MarginContainer" parent="CanvasLayer"]
 visible = false
-layout_mode = 0
-offset_left = 164.0
-offset_top = 110.0
-offset_right = 332.0
-offset_bottom = 150.0
+offset_left = 727.0
+offset_top = 403.0
+offset_right = 902.0
+offset_bottom = 443.0
+scale = Vector2(3, 3)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="shiftmenu"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/shiftmenu"]
 layout_mode = 2
+mouse_filter = 0
 
-[node name="past" type="Button" parent="shiftmenu/HBoxContainer"]
+[node name="past" type="Button" parent="CanvasLayer/shiftmenu/HBoxContainer"]
+layout_mode = 2
+mouse_behavior_recursive = 2
+theme_override_fonts/font = ExtResource("2_n2wtg")
+theme_override_font_sizes/font_size = 8
+text = "PAST
+(J)"
+
+[node name="present" type="Button" parent="CanvasLayer/shiftmenu/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_n2wtg")
 theme_override_font_sizes/font_size = 8
-text = "PAST"
+text = "PRESENT
+	(K)"
 
-[node name="present" type="Button" parent="shiftmenu/HBoxContainer"]
+[node name="future" type="Button" parent="CanvasLayer/shiftmenu/HBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_n2wtg")
 theme_override_font_sizes/font_size = 8
-text = "PRESENT"
+text = "FUTURE
+	(L)"
 
-[node name="future" type="Button" parent="shiftmenu/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_n2wtg")
-theme_override_font_sizes/font_size = 8
-text = "FUTURE"
-
-[connection signal="pressed" from="shiftmenu/HBoxContainer/past" to="." method="_on_past_pressed"]
-[connection signal="pressed" from="shiftmenu/HBoxContainer/present" to="." method="_on_present_pressed"]
-[connection signal="pressed" from="shiftmenu/HBoxContainer/future" to="." method="_on_future_pressed"]
+[connection signal="pressed" from="CanvasLayer/shiftmenu/HBoxContainer/past" to="." method="_on_past_pressed"]
+[connection signal="pressed" from="CanvasLayer/shiftmenu/HBoxContainer/present" to="." method="_on_present_pressed"]
+[connection signal="pressed" from="CanvasLayer/shiftmenu/HBoxContainer/future" to="." method="_on_future_pressed"]
