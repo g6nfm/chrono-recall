@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://biq7x26wc36tx"]
+
+[ext_resource type="Script" uid="uid://8nnvo1peau1" path="res://scripts/officer_bullet.gd" id="1_oees8"]
+[ext_resource type="PackedScene" uid="uid://cojemwl3wpq28" path="res://scenes/hurtbox.tscn" id="2_ykxw0"]
+[ext_resource type="Texture2D" uid="uid://bamfx2ke3v5h8" path="res://assets/sprites/officer_bullet.png" id="3_oees8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_23jat"]
+radius = 11.0
+height = 22.0
+
+[node name="bullet" type="Area2D" groups=["killzone"]]
+scale = Vector2(0.5, 0.5)
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_oees8")
+
+[node name="hurtbox" parent="." instance=ExtResource("2_ykxw0")]
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_23jat")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.1415927
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_oees8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_23jat")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

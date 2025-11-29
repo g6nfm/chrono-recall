@@ -13,6 +13,7 @@ var HP=global.Base_HP
 @onready var coyote_timer: Timer = $Coyote_timer #for better/smoother jumpingd
 @onready var dash_timer: Timer = $Dash_timer
 @onready var invuln_timer: Timer = $invuln_timer
+@onready var camera_2d: Camera2D = $Camera2D
 
 @onready var player: CharacterBody2D = $"."
 
@@ -26,7 +27,7 @@ var HP=global.Base_HP
 
 
 func _ready() -> void:
-	
+	camera_2d.position.x=40
 	animation_tree.active=true
 	global.Player_HP=global.Player_HP
 	
@@ -72,11 +73,13 @@ func _physics_process(delta: float) -> void:
 
 	#flip the guy based on direction
 	if direction > 0:
+		camera_2d.position.x=40
 		global.direction=1
 		animated_sprite.flip_h=false
 		attack.scale.x=1
 		attack.position.x=19*global.direction
 	elif direction < 0:
+		camera_2d.position.x=-40
 		global.direction=-1
 		animated_sprite.flip_h=true
 		attack.scale.x=-1

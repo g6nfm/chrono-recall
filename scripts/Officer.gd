@@ -1,25 +1,26 @@
 extends CharacterBody2D
 
-const speed =50
+
 var target_position: Vector2 = Vector2.ZERO
-var direction = -1
-const firing_range=200
-var HP=2
+
+const firing_range=150
+var HP=5
 var flashing = false
 
 @onready var hitbox: Area2D = $hitbox
 
-@onready var ray_cast_y: RayCast2D = $RayCastY
+
 @onready var ray_cast_playerfinder: RayCast2D = $RayCastPlayerfinder
 @onready var player: CharacterBody2D = $"../player"
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-
-var ArrowScene = preload("res://scenes/Enemies/arrow.tscn")
+var dir=scale.x
+var bulletScene = preload("res://scenes/Enemies/officer_bullet.tscn")
 @export var enemy_id : String = ""
 @export var scene_name : String
 func _ready():
+	
 	
 	randomize()  # Initialize random number generator
  
@@ -35,12 +36,13 @@ func _ready():
 	
 	if GameState.dead_enemies.get(scene_name, {}).get(enemy_id,false):
 		queue_free()
-	direction = -1
+	
 	
 			
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	
 	if HP<=0:
 		animation_player.play("RESET")
 		if sprite_2d.material.get_shader_parameter("Dissolvevalue")<=0.0:
@@ -51,52 +53,66 @@ func _physics_process(delta: float) -> void:
 		sprite_2d.material.set_shader_parameter("Dissolvevalue",sprite_2d.material.get_shader_parameter("Dissolvevalue")-0.02)
 		return
 	if animation_player.current_animation==("attack"):
+		
 		velocity.x=0
-		velocity+=get_gravity() * delta
-		move_and_slide()
+		velocity+=get_gravity()
+		scale.y = -0.1
+		set_rotation(179.07)
+		
+		
+		move_and_collide(velocity)
+		scale.y = 0.1
+		set_rotation(0)
+		scale.x=dir
 		return
 	
 	ray_cast_playerfinder.target_position=(player.position - (ray_cast_playerfinder.global_position)).normalized()*firing_range
 	
 	
+
+		
+		
+		
+	
 	animation_player.play("walk")
 	if not is_on_floor():
 		velocity+=get_gravity() * delta
 
-	if not ray_cast_y.is_colliding() and is_on_floor():
-		direction*=-1
-		scale.x=-scale.x
+	
 
 	
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-		
+
 	if ray_cast_playerfinder.is_colliding() and animation_player.current_animation != "attack":
 		
 		if (ray_cast_playerfinder.get_collider().is_in_group("Player")):
 			
 			target_position=player.global_position
 			if target_position.x<global_position.x:
-				sprite_2d.scale.x=1
+				scale.x=0.1
+				ray_cast_playerfinder.scale.x=10
 			elif target_position.x>global_position.x:
-				sprite_2d.scale.x=-1
+				scale.x=-0.1
+				ray_cast_playerfinder.scale.x=-10
+			
+			dir=scale.x
 			animation_player.play("attack")
 		
 			
-	velocity.x = speed * direction
-	move_and_slide()
 	
-func shoot_arrow() -> void:
 	
-	var arrow = ArrowScene.instantiate()
-	get_tree().current_scene.add_child(arrow)
-	arrow.global_position = ray_cast_playerfinder.global_position
+func shoot_arrow(N) -> void:
+
+	var bullet = bulletScene.instantiate()
 	
-	arrow.setup_arrow(target_position)
+	get_tree().current_scene.add_child(bullet)
+	bullet.global_position = ray_cast_playerfinder.global_position
+
+	bullet.setup_arrow(target_position,N)
 	
 
 func start_walk():
-	sprite_2d.scale.x=-direction
+	
+	
 	animation_player.play("walk")
 
 func _on_hitbox_area_entered(area: Area2D) -> void:

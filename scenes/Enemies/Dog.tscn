@@ -1,0 +1,140 @@
+[gd_scene load_steps=21 format=3 uid="uid://b0hr1k8reeaj2"]
+
+[ext_resource type="Script" uid="uid://ct8wkoccyebu6" path="res://scripts/Dog.gd" id="1_16ga0"]
+[ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="2_tij4v"]
+[ext_resource type="Script" uid="uid://c14vhjk3i8q6y" path="res://scripts/Enemyhurtbox.gd" id="3_jm217"]
+[ext_resource type="Shader" uid="uid://baggp1nthtugs" path="res://scripts/Flash.gdshader" id="4_qwkyt"]
+[ext_resource type="Texture2D" uid="uid://xbl7770l44vb" path="res://assets/sprites/Dog.png" id="4_uddc2"]
+[ext_resource type="Texture2D" uid="uid://bjtc1jgg6l8oy" path="res://assets/sprites/Noise_disolve.tres" id="5_lhs24"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qj3hu"]
+size = Vector2(68, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05wi8"]
+size = Vector2(68, 40)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_at7jh"]
+shader = ExtResource("4_qwkyt")
+shader_parameter/flash_amount = 0.0
+shader_parameter/Noise = ExtResource("5_lhs24")
+shader_parameter/Dissolvevalue = 1.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16ga0"]
+atlas = ExtResource("4_uddc2")
+region = Rect2(204, 0, 68, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_at7jh"]
+atlas = ExtResource("4_uddc2")
+region = Rect2(0, 0, 68, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tij4v"]
+atlas = ExtResource("4_uddc2")
+region = Rect2(68, 0, 68, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jm217"]
+atlas = ExtResource("4_uddc2")
+region = Rect2(136, 0, 68, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwkyt"]
+atlas = ExtResource("4_uddc2")
+region = Rect2(204, 0, 68, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhs24"]
+atlas = ExtResource("4_uddc2")
+region = Rect2(272, 0, 68, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23ulp"]
+atlas = ExtResource("4_uddc2")
+region = Rect2(340, 0, 68, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gtgpc"]
+atlas = ExtResource("4_uddc2")
+region = Rect2(408, 0, 68, 39)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_os4s1"]
+atlas = ExtResource("4_uddc2")
+region = Rect2(476, 0, 68, 39)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ua2fd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16ga0")
+}],
+"loop": true,
+"name": &"Reset",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_at7jh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tij4v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jm217")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwkyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhs24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23ulp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gtgpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_os4s1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0glp"]
+size = Vector2(66, 38)
+
+[node name="Dog" type="CharacterBody2D" groups=["Enemy"]]
+scale = Vector2(0.6, 0.6)
+collision_layer = 0
+script = ExtResource("1_16ga0")
+
+[node name="contacthitbox" parent="." instance=ExtResource("2_tij4v")]
+position = Vector2(60, 16)
+collision_layer = 0
+script = ExtResource("3_jm217")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="contacthitbox"]
+position = Vector2(-61, -17)
+shape = SubResource("RectangleShape2D_qj3hu")
+
+[node name="RayCastY" type="RayCast2D" parent="."]
+position = Vector2(-20, 0)
+target_position = Vector2(0, 54)
+
+[node name="hitbox" type="Area2D" parent="." groups=["Enemy"]]
+position = Vector2(-11, 63)
+collision_layer = 15
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+light_mask = 0
+position = Vector2(10, -64)
+shape = SubResource("RectangleShape2D_05wi8")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_at7jh")
+sprite_frames = SubResource("SpriteFrames_ua2fd")
+animation = &"Reset"
+autoplay = "default"
+speed_scale = 1.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_q0glp")
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

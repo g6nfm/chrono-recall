@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://jfxfpw8jx38i"]
+
+[ext_resource type="Script" uid="uid://bgu055kp0tos2" path="res://scripts/arrow.gd" id="1_23jat"]
+[ext_resource type="Texture2D" uid="uid://c3stbhc8g7ovq" path="res://assets/sprites/arrow.png" id="1_umosx"]
+[ext_resource type="PackedScene" uid="uid://cojemwl3wpq28" path="res://scenes/hurtbox.tscn" id="2_q8ifc"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_23jat"]
+radius = 2.0
+height = 20.000002
+
+[node name="Arrow" type="Area2D" groups=["killzone"]]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_23jat")
+
+[node name="hurtbox" parent="." instance=ExtResource("2_q8ifc")]
+rotation = -3.1415925
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtbox"]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_23jat")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 3.1415927
+texture = ExtResource("1_umosx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_23jat")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
