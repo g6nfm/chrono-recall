@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkemr2g5fddtj"
-path="res://.godot/imported/pixil-frame-5.png-0869112601d3058dc99161c6185a5cae.ctex"
+uid="uid://bvugicggivcer"
+path="res://.godot/imported/Aion_attack.png-b40f6eb55c8c541dd4de6fa1a7d03a4b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/pixil-frame-5.png"
-dest_files=["res://.godot/imported/pixil-frame-5.png-0869112601d3058dc99161c6185a5cae.ctex"]
+source_file="res://assets/sprites/Aion_attack.png"
+dest_files=["res://.godot/imported/Aion_attack.png-b40f6eb55c8c541dd4de6fa1a7d03a4b.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://b0hr1k8reeaj2"]
+[gd_scene load_steps=22 format=3 uid="uid://b0hr1k8reeaj2"]
 
 [ext_resource type="Script" uid="uid://ct8wkoccyebu6" path="res://scripts/Dog.gd" id="1_16ga0"]
 [ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="2_tij4v"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://baggp1nthtugs" path="res://scripts/Flash.gdshader" id="4_qwkyt"]
 [ext_resource type="Texture2D" uid="uid://xbl7770l44vb" path="res://assets/sprites/Dog.png" id="4_uddc2"]
 [ext_resource type="Texture2D" uid="uid://bjtc1jgg6l8oy" path="res://assets/sprites/Noise_disolve.tres" id="5_lhs24"]
+[ext_resource type="AudioStream" uid="uid://crt3ai02m0b1f" path="res://assets/sounds/explosion.wav" id="7_tij4v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qj3hu"]
 size = Vector2(68, 40)
@@ -14,6 +15,7 @@ size = Vector2(68, 40)
 size = Vector2(68, 40)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_at7jh"]
+resource_local_to_scene = true
 shader = ExtResource("4_qwkyt")
 shader_parameter/flash_amount = 0.0
 shader_parameter/Noise = ExtResource("5_lhs24")
@@ -132,6 +134,10 @@ sprite_frames = SubResource("SpriteFrames_ua2fd")
 animation = &"Reset"
 autoplay = "default"
 speed_scale = 1.5
+
+[node name="Death" type="AudioStreamPlayer" parent="AnimatedSprite2D"]
+stream = ExtResource("7_tij4v")
+bus = &"sfx"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -1)

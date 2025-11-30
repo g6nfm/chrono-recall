@@ -1,28 +1,23 @@
 extends CharacterBody2D
-
-const speed =50
-var target_position: Vector2 = Vector2.ZERO
-var direction = -1
-const firing_range=200
 var HP=2
+const speed =35
 var flashing = false
-
-@onready var hitbox: Area2D = $hitbox
-
-@onready var ray_cast_y: RayCast2D = $RayCastY
-@onready var ray_cast_playerfinder: RayCast2D = $RayCastPlayerfinder
-@onready var player: CharacterBody2D = $"../player"
+var direction = -1
+@onready var ray_cast_y: RayCast2D = $RayCastY	
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-@onready var animation_player: AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
-@onready var audio_stream_player: AudioStreamPlayer = $AnimatedSprite2D/AnimationPlayer/AudioStreamPlayer
+
+@onready var attackhitbox: Area2D = $attackhitbox
+@onready var playerdetector: Area2D = $playerdetector
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var contacthitbox: Area2D = $contacthitbox
+@onready var hitbox: Area2D = $hitbox
+@onready var audio_stream_player: AudioStreamPlayer = $AnimationPlayer/AudioStreamPlayer
 
 
 
-var ArrowScene = preload("res://scenes/Enemies/arrow.tscn")
 @export var enemy_id : String = ""
 @export var scene_name : String
 func _ready():
-	
 	randomize()  # Initialize random number generator
  
 	var noise_texture = animated_sprite_2d.material.get("shader_parameter/Noise")
@@ -32,12 +27,13 @@ func _ready():
 	
 	if enemy_id == "":
 		enemy_id=name
-
+		
+		
 	scene_name = get_tree().current_scene.name
 	
 	if GameState.dead_enemies.get(scene_name, {}).get(enemy_id,false):
 		queue_free()
-	
+	direction = -1
 	
 			
 	
@@ -45,6 +41,7 @@ func _ready():
 func _physics_process(delta: float) -> void:
 	if HP<=0:
 		animation_player.play("RESET")
+		contacthitbox.monitoring=false
 		if animated_sprite_2d.material.get_shader_parameter("Dissolvevalue")<=0.0:
 			if not GameState.dead_enemies.has(scene_name):
 				GameState.dead_enemies[scene_name] = {}
@@ -53,29 +50,11 @@ func _physics_process(delta: float) -> void:
 		animated_sprite_2d.material.set_shader_parameter("Dissolvevalue",animated_sprite_2d.material.get_shader_parameter("Dissolvevalue")-0.02)
 		return
 	if animation_player.current_animation==("attack"):
-	
-				
 		
-		
-		velocity.x=0
-		velocity+=get_gravity()
-		scale.y = -1
-		set_rotation(179.07)
-		
-		
-		move_and_collide(velocity)
-		scale.y = 1
-		set_rotation(0)
-		if target_position.x<global_position.x:
-			scale.x=1
-				
-		elif target_position.x>global_position.x:
-			scale.x=-1
+		velocity+=get_gravity() * delta
+		move_and_slide()
 		return
-	
-	ray_cast_playerfinder.target_position=(player.position - (ray_cast_playerfinder.global_position)).normalized()*firing_range
-	
-	
+		
 	animation_player.play("walk")
 	if not is_on_floor():
 		velocity+=get_gravity() * delta
@@ -84,51 +63,42 @@ func _physics_process(delta: float) -> void:
 		direction*=-1
 		scale.x=-scale.x
 
-	
+	velocity.x = speed * direction
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-		
-	if ray_cast_playerfinder.is_colliding() and animation_player.current_animation != "attack":
-		
-		if (ray_cast_playerfinder.get_collider().is_in_group("Player")):
-			
-			target_position=player.global_position
-		
-			animation_player.play("attack")
-		
-			
-	velocity.x = speed * direction
 	move_and_slide()
 	
-func shoot_arrow() -> void:
+func _on_playerdetector_body_entered(_body: Node2D) -> void:
+	velocity.x=0
+	animation_player.play("attack")
+func hit():
+	attackhitbox.monitoring = true
+	velocity.x = 300 * direction
+	move_and_slide()
 	
-	var arrow = ArrowScene.instantiate()
-	get_tree().current_scene.add_child(arrow)
-	arrow.global_position = ray_cast_playerfinder.global_position
-	
-	arrow.setup_arrow(target_position)
-	
-
+func end_of_hit():
+	velocity.x=150*direction
+	move_and_slide()
+	attackhitbox.monitoring = false
 func start_walk():
-	scale.x=-direction
-	
 	animation_player.play("walk")
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
-	
+
 	if area.is_in_group("Player_attack"):
+
 		flash_white()
 		HP-=1
 		if global.direction < 0:
 			velocity=Vector2(-1000,-100)
-		
 		else:
 			velocity=Vector2(1000,-100)
 		move_and_slide()
-	
-	
+		velocity.x=0
 		
 func flash_white() -> void:
+	audio_stream_player.stream=load("res://assets/sounds/hurt.wav")
+	audio_stream_player.play()
 	if flashing:
 		return
 	flashing = true
@@ -141,3 +111,4 @@ func flash_white() -> void:
 	await get_tree().create_timer(0.2).timeout
 	hitbox.set_deferred("monitoring",true)
 	flashing = false
+	

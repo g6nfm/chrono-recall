@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://c20lgyyi205k"]
+[gd_scene load_steps=17 format=3 uid="uid://c20lgyyi205k"]
 
 [ext_resource type="Script" uid="uid://ck3r7uh0qhptd" path="res://scripts/Officer.gd" id="1_il4yx"]
 [ext_resource type="PackedScene" uid="uid://cojemwl3wpq28" path="res://scenes/hurtbox.tscn" id="2_y3pe0"]
 [ext_resource type="Shader" uid="uid://baggp1nthtugs" path="res://scripts/Flash.gdshader" id="3_sl3y0"]
 [ext_resource type="Texture2D" uid="uid://bjtc1jgg6l8oy" path="res://assets/sprites/Noise_disolve.tres" id="4_y7q5n"]
 [ext_resource type="Texture2D" uid="uid://cr00gc80pfqun" path="res://assets/sprites/Russia_Officer.png" id="5_y3pe0"]
+[ext_resource type="AudioStream" uid="uid://b872xmohowdfd" path="res://assets/sounds/death scream 5.wav" id="6_sl3y0"]
+[ext_resource type="AudioStream" uid="uid://6yfn2nsdh7ku" path="res://assets/sounds/officer shoot sound.mp3" id="6_y3pe0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qm8lu"]
 size = Vector2(399.99994, 630)
@@ -23,7 +25,6 @@ shader_parameter/Noise = ExtResource("4_y7q5n")
 shader_parameter/Dissolvevalue = 1.0
 
 [sub_resource type="Animation" id="Animation_uvh2r"]
-length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -36,6 +37,21 @@ tracks/0/keys = {
 "update": 1,
 "values": [2]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_sl3y0")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_qj3hu"]
 resource_name = "attack"
@@ -77,6 +93,29 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 2, 1, 2, 1, 2, 1, 2]
 }
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_y3pe0")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_y3pe0")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_y3pe0")
+}],
+"times": PackedFloat32Array(1.5, 1.6, 1.7)
+}
+tracks/2/use_blend = true
 
 [sub_resource type="Animation" id="Animation_xad4x"]
 resource_name = "walk"
@@ -102,6 +141,8 @@ _data = {
 &"attack": SubResource("Animation_qj3hu"),
 &"walk": SubResource("Animation_xad4x")
 }
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_sl3y0"]
 
 [node name="Officer" type="CharacterBody2D" groups=["Enemy"]]
 scale = Vector2(0.1, 0.1)
@@ -141,6 +182,11 @@ frame = 2
 libraries = {
 &"": SubResource("AnimationLibrary_xad4x")
 }
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
+stream = SubResource("AudioStreamPolyphonic_sl3y0")
+volume_db = -5.0
+bus = &"sfx"
 
 [node name="RayCastPlayerfinder" type="RayCast2D" parent="."]
 position = Vector2(-520, -110)

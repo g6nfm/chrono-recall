@@ -13,6 +13,8 @@ var flashing = false
 @onready var ray_cast_playerfinder: RayCast2D = $RayCastPlayerfinder
 @onready var player: CharacterBody2D = $"../player"
 
+@onready var audio_stream_player: AudioStreamPlayer = $AnimationPlayer/AudioStreamPlayer
+
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 var dir=scale.x
@@ -130,6 +132,8 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	
 		
 func flash_white() -> void:
+	audio_stream_player.stream=load("res://assets/sounds/hurt.wav")
+	audio_stream_player.play()
 	if flashing:
 		return
 	flashing = true

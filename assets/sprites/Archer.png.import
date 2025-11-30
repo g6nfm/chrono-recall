@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkemr2g5fddtj"
-path="res://.godot/imported/pixil-frame-5.png-0869112601d3058dc99161c6185a5cae.ctex"
+uid="uid://bn64gpb35p7ny"
+path="res://.godot/imported/Archer.png-d27fd8eca50709287d6668516d3be3f3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/pixil-frame-5.png"
-dest_files=["res://.godot/imported/pixil-frame-5.png-0869112601d3058dc99161c6185a5cae.ctex"]
+source_file="res://assets/sprites/Archer.png"
+dest_files=["res://.godot/imported/Archer.png-d27fd8eca50709287d6668516d3be3f3.ctex"]
 
 [params]
 

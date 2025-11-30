@@ -1,55 +1,195 @@
-[gd_scene load_steps=14 format=3 uid="uid://vnynytdlhgwd"]
+[gd_scene load_steps=29 format=3 uid="uid://vnynytdlhgwd"]
 
 [ext_resource type="Shader" uid="uid://baggp1nthtugs" path="res://scripts/Flash.gdshader" id="1_8k83v"]
 [ext_resource type="Script" uid="uid://b77y0m4eagxt2" path="res://scripts/archer.gd" id="1_cgghf"]
 [ext_resource type="PackedScene" uid="uid://cojemwl3wpq28" path="res://scenes/hurtbox.tscn" id="2_cgghf"]
-[ext_resource type="Texture2D" uid="uid://cq0dc5gppq04s" path="res://assets/sprites/Game Boy Advance - Castlevania_ Aria of Sorrow - Enemies - Skull Archer.png" id="3_ykrau"]
+[ext_resource type="Texture2D" uid="uid://bn64gpb35p7ny" path="res://assets/sprites/Archer.png" id="3_ocflx"]
 [ext_resource type="Texture2D" uid="uid://bjtc1jgg6l8oy" path="res://assets/sprites/Noise_disolve.tres" id="4_ocflx"]
+[ext_resource type="AudioStream" uid="uid://dmvkfg6e7ejxq" path="res://assets/sounds/archer_preparing.wav" id="6_78qqr"]
+[ext_resource type="AudioStream" uid="uid://crt3ai02m0b1f" path="res://assets/sounds/explosion.wav" id="6_d2nh3"]
+[ext_resource type="AudioStream" uid="uid://0kgl05g1n6f0" path="res://assets/sounds/archer_attack.wav" id="7_d2nh3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qm8lu"]
-size = Vector2(18.5, 33.5)
+size = Vector2(33.25, 43.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05wi8"]
-size = Vector2(17.5, 32.375)
+size = Vector2(31, 43.1875)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_owgmq"]
-size = Vector2(20, 34)
+size = Vector2(33, 44)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8k83v"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_78qqr"]
 shader = ExtResource("1_8k83v")
 shader_parameter/flash_amount = 0.0
 shader_parameter/Noise = ExtResource("4_ocflx")
 shader_parameter/Dissolvevalue = 1.0
 
-[sub_resource type="Animation" id="Animation_uvh2r"]
-length = 0.001
+[sub_resource type="AtlasTexture" id="AtlasTexture_78qqr"]
+atlas = ExtResource("3_ocflx")
+region = Rect2(180, 55, 90, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d2nh3"]
+atlas = ExtResource("3_ocflx")
+region = Rect2(360, 55, 90, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1jqy"]
+atlas = ExtResource("3_ocflx")
+region = Rect2(0, 55, 90, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b6jk6"]
+atlas = ExtResource("3_ocflx")
+region = Rect2(90, 55, 90, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uh5lw"]
+atlas = ExtResource("3_ocflx")
+region = Rect2(270, 55, 90, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8qbab"]
+atlas = ExtResource("3_ocflx")
+region = Rect2(360, 0, 90, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xndft"]
+atlas = ExtResource("3_ocflx")
+region = Rect2(270, 0, 90, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxxt5"]
+atlas = ExtResource("3_ocflx")
+region = Rect2(180, 0, 90, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7yb7"]
+atlas = ExtResource("3_ocflx")
+region = Rect2(90, 0, 90, 55)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qiwg"]
+atlas = ExtResource("3_ocflx")
+region = Rect2(0, 0, 90, 55)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_b6jk6"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Reset",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_78qqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d2nh3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1jqy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b6jk6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uh5lw")
+}],
+"loop": false,
+"name": &"attack",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8qbab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xndft")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxxt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7yb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3qiwg")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="Animation" id="Animation_uh5lw"]
+length = 0.33333668
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath(".:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [&"attack"]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "audio"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_d2nh3")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/2/use_blend = true
 
-[sub_resource type="Animation" id="Animation_qj3hu"]
+[sub_resource type="Animation" id="Animation_b380j"]
 resource_name = "attack"
-length = 6.0
-loop_mode = 1
-step = 0.1
-tracks/0/type = "method"
+length = 1.7500125
+step = 0.125
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath(".")
+tracks/0/path = NodePath(".:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(1.8, 4.9),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"attack"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.375, 0.875, 1, 1.625),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 1.75),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -59,43 +199,64 @@ tracks/0/keys = {
 "method": &"start_walk"
 }]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1.7, 2.1, 2.5, 3.5, 3.9, 4.3, 4.7, 5.1, 5.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [3, 4, 5, 6, 5, 7, 8, 9, 10, 11, 3]
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/AudioStreamPlayer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("6_78qqr")
+}, {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_d2nh3")
+}],
+"times": PackedFloat32Array(0.125, 0.875)
 }
+tracks/3/use_blend = true
 
-[sub_resource type="Animation" id="Animation_xad4x"]
+[sub_resource type="Animation" id="Animation_mkrut"]
 resource_name = "walk"
-length = 0.5
+length = 0.6250125
 loop_mode = 1
-step = 0.1
+step = 0.125
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath(".:animation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1]
+"values": [&"walk"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xad4x"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qrp6p"]
 _data = {
-&"RESET": SubResource("Animation_uvh2r"),
-&"attack": SubResource("Animation_qj3hu"),
-&"walk": SubResource("Animation_xad4x")
+&"RESET": SubResource("Animation_uh5lw"),
+&"attack": SubResource("Animation_b380j"),
+&"walk": SubResource("Animation_mkrut")
 }
+
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_d2nh3"]
 
 [node name="ARCHER" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 0
@@ -106,39 +267,43 @@ collision_layer = 4
 collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
-position = Vector2(9.25, 8.25)
+position = Vector2(17.375, 8.875)
 shape = SubResource("RectangleShape2D_qm8lu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy"]]
 light_mask = 0
-position = Vector2(9, 8)
+position = Vector2(17.5, 8.40625)
 shape = SubResource("RectangleShape2D_05wi8")
 
 [node name="RayCastY" type="RayCast2D" parent="."]
-position = Vector2(-7, 0)
+position = Vector2(-18, 2)
 target_position = Vector2(0, 54)
 
 [node name="contacthurtbox" parent="." instance=ExtResource("2_cgghf")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="contacthurtbox"]
-position = Vector2(9, 8)
+position = Vector2(17.5, 9)
 shape = SubResource("RectangleShape2D_owgmq")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_8k83v")
-position = Vector2(-2, 5)
-texture = ExtResource("3_ykrau")
-hframes = 12
-frame = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_xad4x")
-}
-
 [node name="RayCastPlayerfinder" type="RayCast2D" parent="."]
-position = Vector2(-1, 2)
+position = Vector2(-18, 2)
 target_position = Vector2(-56, 0)
 collision_mask = 3
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_78qqr")
+position = Vector2(-10, 8)
+sprite_frames = SubResource("SpriteFrames_b6jk6")
+animation = &"attack"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_qrp6p")
+}
+speed_scale = 0.7
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimatedSprite2D/AnimationPlayer"]
+stream = SubResource("AudioStreamPolyphonic_d2nh3")
+bus = &"sfx"
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

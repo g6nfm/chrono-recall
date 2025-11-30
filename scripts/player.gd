@@ -22,11 +22,12 @@ var HP=global.Base_HP
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var attack: Node2D = $attack
-
+@onready var state_machine = $AnimationTree["parameters/playback"]
 @onready var bar: Control = $timeshift/CanvasLayer/HP
 
 
 func _ready() -> void:
+	animation_tree.active=true
 	camera_2d.position.x=40
 	animation_tree.active=true
 	global.Player_HP=global.Player_HP
@@ -76,39 +77,38 @@ func _physics_process(delta: float) -> void:
 		camera_2d.position.x=40
 		global.direction=1
 		animated_sprite.flip_h=false
-		attack.scale.x=1
-		attack.position.x=19*global.direction
+		attack.scale.x=5
+		attack.position.x=150*global.direction
 	elif direction < 0:
 		camera_2d.position.x=-40
 		global.direction=-1
 		animated_sprite.flip_h=true
-		attack.scale.x=-1
-		attack.position.x=19*global.direction
+		attack.scale.x=-5
+		attack.position.x=150*global.direction
 	# Start timer for the dash state
 	if Input.is_action_just_pressed("dash"):
 		if can_dash:
+			
 			can_dash=false
 			dash_timer.start()
 	
 	# Handle jumping,double jumping, and coyote time.
 	if Input.is_action_just_pressed("jump") and (is_on_floor() or !coyote_timer.is_stopped()):
+		
 		velocity.y = JUMP_VELOCITY
 	elif has_double_jumped==false and Input.is_action_just_pressed("jump"):
 			velocity.y = JUMP_VELOCITY #can be changed via -/+ 
 			has_double_jumped=true
 			global.double_jump = true
-			
-	
-	
+			state_machine.travel("Double-jump")
 
 	elif is_on_floor():
 		has_double_jumped=false
 		global.double_jump = false
 		can_dash=true
 		
-		
-	
-		
+	if Input.is_action_just_pressed("Attack"):
+		animation_tree.get("parameters/playback").travel("attack")
 		
 		
 	#if direction has a direction! and magnatude!

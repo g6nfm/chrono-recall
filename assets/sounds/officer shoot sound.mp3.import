@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://6yfn2nsdh7ku"
+path="res://.godot/imported/officer shoot sound.mp3-10a0bff29869e13b34bcf5fe7c4d429d.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/officer shoot sound.mp3"
+dest_files=["res://.godot/imported/officer shoot sound.mp3-10a0bff29869e13b34bcf5fe7c4d429d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
