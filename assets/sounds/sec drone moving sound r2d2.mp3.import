@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://caf4xlnsqsscc"
+path="res://.godot/imported/sec drone moving sound r2d2.mp3-fcc6a77d5084c6127f7fbdb86f134c15.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/sec drone moving sound r2d2.mp3"
+dest_files=["res://.godot/imported/sec drone moving sound r2d2.mp3-fcc6a77d5084c6127f7fbdb86f134c15.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cx4bd7086po5u"
+path="res://.godot/imported/player hurt sound.mp3-2cf5c9c415874e5e24285b7d1ebf760d.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/player hurt sound.mp3"
+dest_files=["res://.godot/imported/player hurt sound.mp3-2cf5c9c415874e5e24285b7d1ebf760d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

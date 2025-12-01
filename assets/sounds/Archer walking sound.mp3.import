@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ba2umq0ejql8l"
+path="res://.godot/imported/Archer walking sound.mp3-4fe7529de330606c30f9ae5074dececa.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/Archer walking sound.mp3"
+dest_files=["res://.godot/imported/Archer walking sound.mp3-4fe7529de330606c30f9ae5074dececa.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

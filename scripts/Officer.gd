@@ -132,7 +132,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	
 		
 func flash_white() -> void:
-	audio_stream_player.stream=load("res://assets/sounds/hurt.wav")
+	audio_stream_player.stream=load("res://assets/sounds/player melee hit sound.mp3")
 	audio_stream_player.play()
 	if flashing:
 		return

@@ -19,8 +19,12 @@ func _ready():
 	position_smoothing_enabled = true
 	rotation_smoothing_enabled = true 
 	limit_smoothed=true
-
+	
 func _process(delta):
+	
+	
+	
+	
 	# Detect HP change
 	if global.Player_HP != last_hp:
 		_on_hp_changed()

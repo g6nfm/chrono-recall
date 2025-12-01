@@ -6,21 +6,24 @@ var direction = -1
 
 @onready var contacthitbox: Area2D = $contacthitbox
 @onready var hitbox: Area2D = $hitbox
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
 @onready var ray_cast_y: RayCast2D = $RayCastY
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+@onready var death: AudioStreamPlayer = $AnimatedSprite2D/Death
 
 
 
 @export var enemy_id : String = ""
 @export var scene_name : String
 func _ready():
+	death.stream=load("res://assets/sounds/dog running sound.mp3")
+	death.play()
 	randomize()  # Initialize random number generator
- 
 	var noise_texture = animated_sprite_2d.material.get("shader_parameter/Noise")
 	var noise = noise_texture.noise
 	noise.seed = randi_range(0,10)
 	noise_texture.noise = noise 
-	
+	print(noise.seed)
 	if enemy_id == "":
 		enemy_id=name
 		
@@ -35,17 +38,28 @@ func _ready():
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	
 	if HP<=0:
+		
+		if death.stream==load("res://assets/sounds/dog running sound.mp3") and !animated_sprite_2d.animation=="Reset":
+				death.stream=load("res://assets/sounds/dog_death.wav")
+				death.play()
+		
 		animated_sprite_2d.play("Reset")
+		
 		contacthitbox.monitoring=false
 		if animated_sprite_2d.material.get_shader_parameter("Dissolvevalue")<=0.0:
+			
 			if not GameState.dead_enemies.has(scene_name):
 				GameState.dead_enemies[scene_name] = {}
 			GameState.dead_enemies[scene_name][enemy_id]=true
 			queue_free()
+		
 		animated_sprite_2d.material.set_shader_parameter("Dissolvevalue",animated_sprite_2d.material.get_shader_parameter("Dissolvevalue")-0.02)
 		return
+		
 	
+		
 
 	if not is_on_floor():
 		velocity+=get_gravity() * delta

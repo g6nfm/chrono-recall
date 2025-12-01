@@ -73,7 +73,7 @@ func _on_playerdetector_body_entered(_body: Node2D) -> void:
 	animation_player.play("attack")
 func hit():
 	attackhitbox.monitoring = true
-	velocity.x = 300 * direction
+	velocity.x = 600 * direction
 	move_and_slide()
 	
 func end_of_hit():
@@ -99,7 +99,7 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 		
 		
 func flash_white() -> void:
-	audio_stream_player.stream=load("res://assets/sounds/hurt.wav")
+	audio_stream_player.stream=load("res://assets/sounds/player melee hit sound.mp3")
 	audio_stream_player.play()
 	if flashing:
 		return

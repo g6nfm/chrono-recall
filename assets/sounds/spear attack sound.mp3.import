@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dukud0mqxfu5b"
+path="res://.godot/imported/spear attack sound.mp3-5d74544bbc411988ccf30ab72e58cc0f.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/spear attack sound.mp3"
+dest_files=["res://.godot/imported/spear attack sound.mp3-5d74544bbc411988ccf30ab72e58cc0f.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

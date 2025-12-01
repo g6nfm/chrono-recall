@@ -8,9 +8,9 @@ extends Area2D
 
 func _process(_delta):
 	
-	if Input.is_action_just_pressed("Attack"):
+	if Input.is_action_just_pressed("Attack") and animation_player.current_animation!="Swing":
 		
-		animation_player.play("Swing")
+			animation_player.play("Swing")
 		
 
 func hit():

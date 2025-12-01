@@ -6,7 +6,7 @@
 [ext_resource type="Shader" uid="uid://baggp1nthtugs" path="res://scripts/Flash.gdshader" id="4_qwkyt"]
 [ext_resource type="Texture2D" uid="uid://xbl7770l44vb" path="res://assets/sprites/Dog.png" id="4_uddc2"]
 [ext_resource type="Texture2D" uid="uid://bjtc1jgg6l8oy" path="res://assets/sprites/Noise_disolve.tres" id="5_lhs24"]
-[ext_resource type="AudioStream" uid="uid://crt3ai02m0b1f" path="res://assets/sounds/explosion.wav" id="7_tij4v"]
+[ext_resource type="AudioStream" uid="uid://d0p8xa47qiwul" path="res://assets/sounds/dog running sound.mp3" id="7_tij4v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qj3hu"]
 size = Vector2(68, 40)
@@ -131,13 +131,13 @@ shape = SubResource("RectangleShape2D_05wi8")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_at7jh")
 sprite_frames = SubResource("SpriteFrames_ua2fd")
-animation = &"Reset"
 autoplay = "default"
 speed_scale = 1.5
 
 [node name="Death" type="AudioStreamPlayer" parent="AnimatedSprite2D"]
 stream = ExtResource("7_tij4v")
 bus = &"sfx"
+parameters/looping = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, -1)

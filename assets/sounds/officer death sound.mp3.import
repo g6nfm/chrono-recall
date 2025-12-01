@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dgsabuskap3ek"
+path="res://.godot/imported/officer death sound.mp3-523e7691a37f2f36a156442c8a68eb1c.mp3str"
+
+[deps]
+
+source_file="res://assets/sounds/officer death sound.mp3"
+dest_files=["res://.godot/imported/officer death sound.mp3-523e7691a37f2f36a156442c8a68eb1c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

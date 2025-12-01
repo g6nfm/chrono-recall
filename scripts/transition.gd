@@ -4,6 +4,7 @@ extends CanvasLayer
 @onready var color_rect: ColorRect = $ColorRect
 @onready var color_rectflash: ColorRect = $ColorRectflash
 @onready var texture_rectdistortion: TextureRect = $TextureRectdistortion
+@onready var audio_stream_player: AudioStreamPlayer = $AudioStreamPlayer
 
 var next_scene_path: String
 var duration := 0.6
@@ -24,7 +25,7 @@ func _begin_time_warp():
 	get_tree().paused = true
 	var t = create_tween()
 	# Step 1: Distortion grows in
-	
+	audio_stream_player.play()
 	
 	t.tween_property(texture_rectdistortion, "modulate:a", 1.0, duration * 0.5)
 	

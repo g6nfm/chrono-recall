@@ -21,14 +21,17 @@ var HP=global.Base_HP
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var attack: Node2D = $attack
+@onready var attack: Area2D = $attack
+
+
 @onready var state_machine = $AnimationTree["parameters/playback"]
 @onready var bar: Control = $timeshift/CanvasLayer/HP
 
 
+
 func _ready() -> void:
 	animation_tree.active=true
-	camera_2d.position.x=40
+	camera_2d.position.x=250
 	animation_tree.active=true
 	global.Player_HP=global.Player_HP
 	
@@ -74,17 +77,17 @@ func _physics_process(delta: float) -> void:
 
 	#flip the guy based on direction
 	if direction > 0:
-		camera_2d.position.x=40
+		camera_2d.position.x=250
 		global.direction=1
 		animated_sprite.flip_h=false
-		attack.scale.x=5
-		attack.position.x=150*global.direction
+		attack.position.x=200
+		
 	elif direction < 0:
-		camera_2d.position.x=-40
+		camera_2d.position.x=-250
 		global.direction=-1
 		animated_sprite.flip_h=true
-		attack.scale.x=-5
-		attack.position.x=150*global.direction
+		attack.position.x=-200
+		
 	# Start timer for the dash state
 	if Input.is_action_just_pressed("dash"):
 		if can_dash:
@@ -144,12 +147,26 @@ func knockback():
 	invuln_timer.start()
 	
 	if global.hitx>position.x:
-		velocity=Vector2(-500,-100)
-		
+		velocity=Vector2(-5000*global.boss,-100)
 	else:
-		velocity=Vector2(500,-100)
+		velocity=Vector2(5000*global.boss,-100)
+	
 		
 	move_and_slide()
 func died():
 	global.start_over()
 	
+func hit():
+	
+	attack.set_collision_layer_value(1,1)
+	attack.set_collision_layer_value(2,1)
+	attack.set_collision_mask_value(1,1)
+	attack.set_collision_mask_value(2,1)
+	attack.monitorable = true
+	
+func end_of_hit():
+	attack.monitorable = false
+	attack.set_collision_layer_value(1,0)
+	attack.set_collision_layer_value(2,0)
+	attack.set_collision_mask_value(1,0)
+	attack.set_collision_mask_value(2,0)

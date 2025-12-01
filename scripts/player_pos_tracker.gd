@@ -8,7 +8,7 @@ var double_jump = false
 var can_dash = false
 var Base_HP=10
 var Player_HP = Base_HP
-
+var boss=1
 var velocity
 
 func start_over():

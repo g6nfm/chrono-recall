@@ -7,7 +7,7 @@ var flashing = false
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var cooldown: Timer = $cooldown
 @onready var boss_bar: Control = $Boss_Bar/CanvasLayer/Shake
-
+@onready var audio_stream_player: AudioStreamPlayer = $AnimationPlayer/AudioStreamPlayer
 @onready var hitbox: Area2D = $hitbox
 @onready var attackhitbox: Area2D = $attackhitbox
 @onready var playerdetector: Area2D = $playerdetector
@@ -22,6 +22,7 @@ var GeyserScene = preload("res://scenes/Enemies/Poseidon/geyser.tscn")
 @export var scene_name : String
 
 func _ready():
+	
 	if GameState.bosshp==0:
 		GameState.bosshp=HP
 	else:
@@ -63,8 +64,8 @@ func _physics_process(_delta: float) -> void:
 	
 	if  !playerdetector.get_overlapping_bodies().is_empty():
 		
-		animation_player.play("Slash")
-		cooldown.start()
+		animation_player.play("Stab")
+		
 	if animation_player.current_animation==("Idle"):
 		
 		var coin=rng.randi_range(1, 2)
@@ -80,7 +81,7 @@ func wave():
 	var Wave = WaveScene.instantiate()
 	get_tree().current_scene.add_child(Wave)
 	Wave.global_position = playerdetector.global_position
-	Wave.global_position.y+=12
+	Wave.global_position.y+=17
 	
 	
 func Geyser():
@@ -88,13 +89,19 @@ func Geyser():
 		var geyser = GeyserScene.instantiate()
 		get_tree().current_scene.add_child(geyser)
 		geyser.global_position = playerdetector.global_position
-		geyser.global_position.y+=5
+		geyser.global_position.y+=8
 		
-		geyser.global_position.x+=-40*n-(rng.randi_range(0,30))
+		geyser.global_position.x+=-50*n-(rng.randi_range(0,50))
 func Idle():
 	animation_player.play("Idle")
 	cooldown.start()
+func hit():
+	attackhitbox.monitoring = true
 	
+	
+func end_of_hit():
+	
+	attackhitbox.monitoring = false	
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
 	
@@ -109,6 +116,8 @@ func _on_hitbox_area_entered(area: Area2D) -> void:
 	
 	
 func flash_white() -> void:
+	audio_stream_player.stream=load("res://assets/sounds/player melee hit sound.mp3")
+	audio_stream_player.play()
 	if flashing:
 		return
 	flashing = true

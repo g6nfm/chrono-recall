@@ -7,7 +7,7 @@ length = 0.001
 
 [sub_resource type="Animation" id="Animation_cipbh"]
 resource_name = "Swing"
-length = 0.45
+length = 0.5
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
