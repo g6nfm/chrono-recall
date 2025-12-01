@@ -127,12 +127,24 @@ func _physics_process(delta: float) -> void:
 	var was_on_floor=is_on_floor()
 	#connect direction to movement animation tree
 	animation_tree.set("parameters/Move/blend_position",direction)
-	if HP!=global.Player_HP:
+	if HP>global.Player_HP:
 		
 			animation_tree.get("parameters/playback").travel("Hurt")
 			has_double_jumped=false
 			
 			bar.damage(HP-1)
+			HP=global.Player_HP
+			
+	elif HP<global.Player_HP:
+		
+			if global.Player_HP>7:
+				bar.set_health(10)
+				global.Player_HP=10
+				HP=global.Player_HP
+				
+			else:
+				
+				bar.heal(HP+3)
 			HP=global.Player_HP
 			
 	global.velocity=velocity

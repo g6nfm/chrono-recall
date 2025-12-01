@@ -6,14 +6,17 @@ var direction = 1
 const firing_range=200
 var HP=2
 var flashing = false
-
+var startscale=scale.x
 @onready var hitbox: Area2D = $hitbox
 
 @onready var timer: Timer = $Timer
 @export var length:int
+
 @onready var ray_cast_playerfinder: RayCast2D = $RayCastPlayerfinder
-@onready var player: CharacterBody2D = $"../player"
+
 @onready var contacthurtbox: Area2D = $contacthurtbox
+
+@onready var player: CharacterBody2D = $"../player"
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -22,6 +25,12 @@ var boltScene = preload("res://scenes/Enemies/bolt.tscn")
 @export var enemy_id : String = ""
 @export var scene_name : String
 func _ready():
+	if scale.x>0:
+		ray_cast_playerfinder.scale.x=-ray_cast_playerfinder.scale.x
+		direction=1
+	elif scale.x<0:
+		direction=-1
+	ray_cast_playerfinder.scale.x=-ray_cast_playerfinder.scale.x
 	randomize()  # Initialize random number generator
  
 	var noise_texture = animated_sprite_2d.material.get("shader_parameter/Noise")
@@ -58,25 +67,23 @@ func _physics_process(_delta: float) -> void:
 	if animation_player.current_animation==("attack"):
 		timer.paused=true
 		velocity.x=0
-		move_and_slide()
+		move_and_collide(velocity)
+		
+	
+		
 		return
 	ray_cast_playerfinder.target_position=(player.position - (ray_cast_playerfinder.global_position)).normalized()*firing_range
 	animation_player.play("Idle")
 
-	
-	
 
-
-	
-		
-		
 	if ray_cast_playerfinder.is_colliding() and animation_player.current_animation != "attack":
 		
 		if (ray_cast_playerfinder.get_collider().is_in_group("Player")):
 			
 			target_position=player.global_position
 			if target_position.x<global_position.x:
-				animated_sprite_2d.scale.x=-1
+				animated_sprite_2d.scale.x=1
+				
 			elif target_position.x>global_position.x:
 				animated_sprite_2d.scale.x=1
 			animation_player.play("attack")
@@ -97,7 +104,7 @@ func shoot_bolt() -> void:
 
 func start_Idle():
 	timer.paused=false
-	animated_sprite_2d.scale.x=direction
+	
 	animation_player.play("Idle")
 
 func _on_hitbox_area_entered(area: Area2D) -> void:
@@ -131,6 +138,6 @@ func flash_white() -> void:
 
 func _on_timer_timeout() -> void:
 	direction*=-1
-	ray_cast_playerfinder.position.x*=-1
+	
 	animated_sprite_2d.scale.x=-animated_sprite_2d.scale.x
 	timer.start(length)

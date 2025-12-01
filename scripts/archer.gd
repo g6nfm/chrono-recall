@@ -11,10 +11,11 @@ var flashing = false
 
 @onready var ray_cast_y: RayCast2D = $RayCastY
 @onready var ray_cast_playerfinder: RayCast2D = $RayCastPlayerfinder
-@onready var player: CharacterBody2D = $"../player"
+
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
 @onready var audio_stream_player: AudioStreamPlayer = $AnimatedSprite2D/AnimationPlayer/AudioStreamPlayer
+@onready var player: CharacterBody2D = $"../player"
 
 
 

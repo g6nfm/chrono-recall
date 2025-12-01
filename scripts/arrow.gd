@@ -18,7 +18,8 @@ func _physics_process(delta):
 
 func _on_body_entered(body: Node2D) -> void:
 	
-	if body is TileMap:
+
+	if body is TileMapLayer:
 		queue_free()
 	 
 

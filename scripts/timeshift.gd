@@ -1,10 +1,11 @@
 extends Control
 
 @export var test: Control
-@onready var manager: Node = $"../../Manager"
+
 @onready var shiftmenu: MarginContainer = $CanvasLayer/shiftmenu
 @onready var hp: MarginContainer = $CanvasLayer/HP
 
+@onready var manager: Node = $"../../Manager"
 
 # Called when the node enters the scene tree for the first time.
 @onready var player: CharacterBody2D = $".."
