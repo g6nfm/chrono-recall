@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://dxfnvowgwnld6"]
 
 [ext_resource type="Script" uid="uid://5x0vr558bd45" path="res://scripts/manager.gd" id="1_gee14"]
-[ext_resource type="PackedScene" uid="uid://cn0cr5yemsoc7" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://cn0cr5yemsoc7" path="res://scenes/Player/player.tscn" id="1_uwrxv"]
 [ext_resource type="Texture2D" uid="uid://e58onxh55fj2" path="res://assets/sprites/world_tileset.png" id="1_yqjtg"]
 [ext_resource type="Texture2D" uid="uid://ck320aqq3mh8h" path="res://assets/sprites/atlantis-tilemap.png" id="5_bo65l"]
-[ext_resource type="PackedScene" uid="uid://c4bga8glpvmte" path="res://scenes/timeshift.tscn" id="6_7hti3"]
+[ext_resource type="PackedScene" uid="uid://c4bga8glpvmte" path="res://scenes/Player/timeshift.tscn" id="6_7hti3"]
 [ext_resource type="PackedScene" uid="uid://c2ymonwddm3tg" path="res://scenes/levels/level1/backgroundatlantispresent.tscn" id="7_bo65l"]
 [ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="8_j7wce"]
 [ext_resource type="AudioStream" uid="uid://bxw2bp60j0crv" path="res://assets/music/atlantis.mp3" id="9_7hti3"]
@@ -390,14 +390,14 @@ layer_1/tile_data = PackedInt32Array(524287, 3, 1, 458752, 3, 1, 458753, 3, 1, 4
 z_index = 2
 position = Vector2(-118, 111)
 
-[node name="timeshift" parent="player" instance=ExtResource("6_7hti3")]
+[node name="timeshift2" parent="player" instance=ExtResource("6_7hti3")]
 visible = false
 offset_left = -82.0
 offset_top = -26.0
 offset_right = -82.0
 offset_bottom = -26.0
 
-[node name="Camera2D" type="Camera2D" parent="player"]
+[node name="Camera2D2" type="Camera2D" parent="player"]
 z_index = -1
 position = Vector2(0, -6)
 zoom = Vector2(4, 4)

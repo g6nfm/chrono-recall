@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnqc1wi7nkhuk"
-path="res://.godot/imported/facility.png-c63b6b9c0fdf01e293e465dd596fab17.ctex"
+uid="uid://y1wbxiw272xy"
+path="res://.godot/imported/facility trimmed.png-7a93f39db566102a9e038172da90b71a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/facility.png"
-dest_files=["res://.godot/imported/facility.png-c63b6b9c0fdf01e293e465dd596fab17.ctex"]
+source_file="res://assets/sprites/facility trimmed.png"
+dest_files=["res://.godot/imported/facility trimmed.png-7a93f39db566102a9e038172da90b71a.ctex"]
 
 [params]
 
