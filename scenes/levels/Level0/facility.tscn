@@ -1,17 +1,22 @@
-[gd_scene load_steps=8 format=4 uid="uid://ca0bitk6wupp5"]
+[gd_scene load_steps=11 format=4 uid="uid://dll8ce7y8kovx"]
 
 [ext_resource type="Script" uid="uid://5x0vr558bd45" path="res://scripts/manager.gd" id="1_gee14"]
-[ext_resource type="TileSet" uid="uid://ijiiyransvc5" path="res://scenes/levels/level1/facility.tres" id="2_aba0w"]
+[ext_resource type="TileSet" uid="uid://ijiiyransvc5" path="res://scenes/levels/Level0/facility.tres" id="2_aba0w"]
 [ext_resource type="PackedScene" uid="uid://cdsa35jjs57cp" path="res://scenes/Enemies/FLying_sec.tscn" id="3_4wb0m"]
 [ext_resource type="PackedScene" uid="uid://dgrsxff0l4mna" path="res://scenes/Enemies/Sec_Drone.tscn" id="4_4wb0m"]
 [ext_resource type="PackedScene" uid="uid://cn0cr5yemsoc7" path="res://scenes/Player/player.tscn" id="4_8yss7"]
 [ext_resource type="PackedScene" uid="uid://d2nxbe70mc6qa" path="res://scenes/coin.tscn" id="5_8yss7"]
+[ext_resource type="PackedScene" uid="uid://2ybr7r6i68pn" path="res://scenes/Chrono.tscn" id="7_75sp1"]
+[ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="8_8mokh"]
 
 [sub_resource type="TileSet" id="TileSet_lbhrr"]
 resource_name = "facility tile"
 physics_layer_0/collision_layer = 1
 
-[node name="gamepa" type="Node2D"]
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_8mokh"]
+
+[node name="gameF" type="Node2D"]
+position = Vector2(195, 21)
 
 [node name="Manager" type="Node" parent="."]
 unique_name_in_owner = true
@@ -72,7 +77,6 @@ scale = Vector2(-0.07, 0.07)
 light_mask = 0
 position = Vector2(389, 154.00002)
 rotation = 0.009602181
-scale = Vector2(0.07, 0.07)
 
 [node name="Flying_sec6" parent="." instance=ExtResource("3_4wb0m")]
 light_mask = 0
@@ -90,7 +94,6 @@ scale = Vector2(-0.07, 0.07)
 light_mask = 0
 position = Vector2(874.00006, 76)
 rotation = 0.009602181
-scale = Vector2(0.07, 0.07)
 
 [node name="Flying_sec10" parent="." instance=ExtResource("3_4wb0m")]
 light_mask = 0
@@ -142,16 +145,15 @@ position = Vector2(1674.0001, 345)
 light_mask = 0
 position = Vector2(2064, 94.00003)
 rotation = 0.009602181
-scale = Vector2(0.07, 0.07)
 
 [node name="R2D7" parent="." instance=ExtResource("4_4wb0m")]
 z_index = 1
-position = Vector2(1605.0001, -8.000001)
+position = Vector2(1605.0001, -12.000001)
 scale = Vector2(-1.3, 1.3)
 
 [node name="R2D8" parent="." instance=ExtResource("4_4wb0m")]
 z_index = 1
-position = Vector2(1290.0001, -9.000001)
+position = Vector2(1290, -11.000001)
 scale = Vector2(-1.3, 1.3)
 
 [node name="Flying_sec14" parent="." instance=ExtResource("3_4wb0m")]
@@ -174,11 +176,11 @@ scale = Vector2(-0.07, 0.07)
 
 [node name="R2D9" parent="." instance=ExtResource("4_4wb0m")]
 z_index = 1
-position = Vector2(2246, -87)
+position = Vector2(2246.0002, -95)
 
 [node name="R2D10" parent="." instance=ExtResource("4_4wb0m")]
 z_index = 1
-position = Vector2(2695.0002, -87)
+position = Vector2(2694.0002, -93)
 
 [node name="Flying_sec17" parent="." instance=ExtResource("3_4wb0m")]
 light_mask = 0
@@ -188,11 +190,11 @@ scale = Vector2(-0.07, 0.07)
 
 [node name="R2D11" parent="." instance=ExtResource("4_4wb0m")]
 z_index = 1
-position = Vector2(3046.0002, 433)
+position = Vector2(3124.0002, 512)
 
 [node name="R2D12" parent="." instance=ExtResource("4_4wb0m")]
 z_index = 1
-position = Vector2(3148.0002, 159.00003)
+position = Vector2(3139, 144)
 scale = Vector2(-1.3, 1.3)
 
 [node name="Flying_sec18" parent="." instance=ExtResource("3_4wb0m")]
@@ -219,12 +221,23 @@ position = Vector2(659, 19)
 [node name="coin2" parent="." instance=ExtResource("5_8yss7")]
 position = Vector2(1719, 243)
 
+[node name="coin5" parent="." instance=ExtResource("5_8yss7")]
+position = Vector2(2822, -31)
+
 [node name="coin4" parent="." instance=ExtResource("5_8yss7")]
-position = Vector2(2979, 123)
+position = Vector2(3025, 259)
 
 [node name="coin3" parent="." instance=ExtResource("5_8yss7")]
 position = Vector2(3381, 114)
 
 [node name="player" parent="." instance=ExtResource("4_8yss7")]
-position = Vector2(-155, 23)
-scale = Vector2(0.07, 0.07)
+position = Vector2(-168, -18)
+
+[node name="Chrono" parent="." instance=ExtResource("7_75sp1")]
+position = Vector2(4557, -31)
+
+[node name="killzone" parent="." instance=ExtResource("8_8mokh")]
+position = Vector2(2107, 845)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+shape = SubResource("WorldBoundaryShape2D_8mokh")

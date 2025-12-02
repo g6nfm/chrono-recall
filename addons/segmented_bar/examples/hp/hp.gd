@@ -20,5 +20,5 @@ func damage(new_health: float) -> void:
 
 
 func heal(new_health: float) -> void:
-	segmented_bar.change_rate = 1000.0
-	segmented_bar.slow_change(new_health, Color.TRANSPARENT, 0.0)
+	segmented_bar.change_rate = 1.0
+	segmented_bar.slow_change(new_health, Color.TRANSPARENT, 0.5)

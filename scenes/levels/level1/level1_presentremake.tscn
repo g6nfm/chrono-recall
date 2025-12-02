@@ -1,13 +1,18 @@
-[gd_scene load_steps=9 format=4 uid="uid://qs6amhybt8ot"]
+[gd_scene load_steps=11 format=4 uid="uid://5uci16aheaek"]
 
 [ext_resource type="Script" uid="uid://5x0vr558bd45" path="res://scripts/manager.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cn0cr5yemsoc7" path="res://scenes/Player/player.tscn" id="1_uwrxv"]
 [ext_resource type="TileSet" uid="uid://cnix70y3tpp6g" path="res://scenes/levels/level1/atlantispresent.tres" id="6_5ewmw"]
 [ext_resource type="PackedScene" uid="uid://c2ymonwddm3tg" path="res://scenes/levels/level1/backgroundatlantispresent.tscn" id="7_bo65l"]
 [ext_resource type="PackedScene" uid="uid://vnynytdlhgwd" path="res://scenes/Enemies/Archer.tscn" id="8_0g6s5"]
+[ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="8_j7wce"]
 [ext_resource type="PackedScene" uid="uid://dbnmylhndo1fv" path="res://scenes/Enemies/Spearguy.tscn" id="8_ps1cv"]
 [ext_resource type="AudioStream" uid="uid://bxw2bp60j0crv" path="res://assets/music/atlantis.mp3" id="9_7hti3"]
 [ext_resource type="PackedScene" uid="uid://dnqf3aho3oap" path="res://scenes/Enemies/Poseidon/Poseidon.tscn" id="9_gwoa7"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_0g6s5"]
+a = Vector2(-693, 31)
+b = Vector2(3574, 15)
 
 [node name="game" type="Node2D"]
 
@@ -36,7 +41,7 @@ tile_map_data = PackedByteArray("AAAa/wkAAQAAAAAAAAAa/xEAAQAFAAEAABAi/wkAAQAAAAA
 tile_set = ExtResource("6_5ewmw")
 
 [node name="player" parent="." instance=ExtResource("1_uwrxv")]
-position = Vector2(-3066, 550)
+position = Vector2(-2374.0002, 65.99999)
 
 [node name="SPEAR" parent="." instance=ExtResource("8_ps1cv")]
 position = Vector2(-1414, 49)
@@ -105,3 +110,10 @@ scale = Vector2(-1, 1)
 
 [node name="Poseidon" parent="." instance=ExtResource("9_gwoa7")]
 position = Vector2(-2189, 710)
+
+[node name="killzone" parent="." instance=ExtResource("8_j7wce")]
+position = Vector2(-1510, 590)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(345, -6)
+shape = SubResource("SegmentShape2D_0g6s5")

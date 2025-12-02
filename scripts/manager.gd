@@ -2,10 +2,19 @@ extends Node
 
 
 var paused = false
-
+var scene_name = ""
 
 @onready var timeshift: Control = $"../player/timeshift"
 @onready var shiftmenu: MarginContainer = $"../player/timeshift/CanvasLayer/shiftmenu"
+
+
+
+func _ready():
+# Get the name of the root node
+	scene_name = get_tree().current_scene.get_name()
+
+
+# Get the file path of the current scene
 
 
 
@@ -28,7 +37,8 @@ func _process(_delta: float) -> void:
 		
 
 func display():
-	
+	if scene_name=="gameF":
+		return
 	paused=!paused
 	if paused==false:
 		timeshift.shifthide()

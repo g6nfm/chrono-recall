@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=4 uid="uid://cfiusubcspnj"]
+[gd_scene load_steps=9 format=4 uid="uid://ca8y0jv3hea78"]
 
 [ext_resource type="Script" uid="uid://5x0vr558bd45" path="res://scripts/manager.gd" id="1_gee14"]
 [ext_resource type="TileSet" uid="uid://3aqdrfqipufm" path="res://scenes/levels/level1/atlantisfuture.tres" id="5_cquu5"]
-[ext_resource type="PackedScene" uid="uid://c66kcnlvec37q" path="res://scenes/levels/level1/backgroundatlantisfuture.tscn" id="6_5nklx"]
+[ext_resource type="PackedScene" path="res://scenes/levels/level1/backgroundatlantisfuture.tscn" id="6_5nklx"]
 [ext_resource type="PackedScene" uid="uid://dbnmylhndo1fv" path="res://scenes/Enemies/Spearguy.tscn" id="6_s1u80"]
 [ext_resource type="PackedScene" uid="uid://vnynytdlhgwd" path="res://scenes/Enemies/Archer.tscn" id="7_aifa8"]
 [ext_resource type="PackedScene" uid="uid://dnqf3aho3oap" path="res://scenes/Enemies/Poseidon/Poseidon.tscn" id="7_cquu5"]
@@ -103,4 +103,4 @@ scale = Vector2(-1, 1)
 position = Vector2(-2189, 710)
 
 [node name="player" parent="." instance=ExtResource("9_531i6")]
-position = Vector2(-2356, 79)
+position = Vector2(-3101, -262.99997)
