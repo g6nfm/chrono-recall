@@ -1,7 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmudep7py4cii"]
+[gd_scene load_steps=3 format=3 uid="uid://c66kcnlvec37q"]
 
-[ext_resource type="Texture2D" uid="uid://b1026uqt6o75i" path="res://assets/sprites/atlantispast.png" id="1_j6ocd"]
-[ext_resource type="Texture2D" uid="uid://d22ifo7i8br1e" path="res://assets/sprites/atlantis-SKY.png" id="2_mbcv6"]
+[ext_resource type="Texture2D" uid="uid://bx34slmrg0mak" path="res://assets/sprites/atlantisFUTURE.png" id="1_nh3go"]
+[ext_resource type="Texture2D" uid="uid://dac4vk84bej5y" path="res://assets/sprites/atlantis-FUTURE.png" id="2_cg7c3"]
 
 [node name="Background" type="Node2D"]
 
@@ -13,7 +13,7 @@ repeat_times = 10
 z_index = -1
 texture_filter = 1
 scale = Vector2(1.453125, 1.453125)
-texture = ExtResource("1_j6ocd")
+texture = ExtResource("1_nh3go")
 
 [node name="Parallax2D2" type="Parallax2D" parent="."]
 scroll_offset = Vector2(0, -279.345)
@@ -25,4 +25,4 @@ z_index = -1
 texture_filter = 1
 position = Vector2(0, -278.99997)
 scale = Vector2(1.453, 1.453)
-texture = ExtResource("2_mbcv6")
+texture = ExtResource("2_cg7c3")
