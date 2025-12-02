@@ -6,11 +6,14 @@ var direction = -1
 const firing_range=200
 var HP=2
 var flashing = false
+var dir=0
+var side=1
+
 
 @onready var hitbox: Area2D = $hitbox
-
 @onready var ray_cast_y: RayCast2D = $RayCastY
 @onready var ray_cast_playerfinder: RayCast2D = $RayCastPlayerfinder
+@onready var contacthurtbox: Area2D = $contacthurtbox
 
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimatedSprite2D/AnimationPlayer
@@ -24,6 +27,13 @@ var ArrowScene = preload("res://scenes/Enemies/arrow.tscn")
 @export var scene_name : String
 func _ready():
 	
+	if scale.x>0:
+		direction=-1
+	elif scale.x<0:
+		direction=1
+		side=-1
+		ray_cast_playerfinder.scale.x=-1
+	
 	randomize()  # Initialize random number generator
  
 	var noise_texture = animated_sprite_2d.material.get("shader_parameter/Noise")
@@ -31,21 +41,21 @@ func _ready():
 	noise.seed = randi_range(0,10)
 	noise_texture.noise = noise 
 	
+
 	if enemy_id == "":
 		enemy_id=name
-
+		
 	scene_name = get_tree().current_scene.name
 	
 	if GameState.dead_enemies.get(scene_name, {}).get(enemy_id,false):
 		queue_free()
-	
-	
-			
-	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
+	
 	if HP<=0:
 		animation_player.play("RESET")
+		contacthurtbox.monitoring=false
 		if animated_sprite_2d.material.get_shader_parameter("Dissolvevalue")<=0.0:
 			if not GameState.dead_enemies.has(scene_name):
 				GameState.dead_enemies[scene_name] = {}
@@ -53,51 +63,44 @@ func _physics_process(delta: float) -> void:
 			queue_free()
 		animated_sprite_2d.material.set_shader_parameter("Dissolvevalue",animated_sprite_2d.material.get_shader_parameter("Dissolvevalue")-0.02)
 		return
+		
 	if animation_player.current_animation==("attack"):
-	
-				
-		
-		
 		velocity.x=0
-		velocity+=get_gravity()
-		scale.y = -1
-		set_rotation(179.07)
-		
+		velocity+=get_gravity() * delta
 		
 		move_and_collide(velocity)
-		scale.y = 1
-		set_rotation(0)
-		if target_position.x<global_position.x:
-			scale.x=1
-				
-		elif target_position.x>global_position.x:
-			scale.x=-1
+		
 		return
-	
 	ray_cast_playerfinder.target_position=(player.position - (ray_cast_playerfinder.global_position)).normalized()*firing_range
-	
-	
 	animation_player.play("walk")
-	if not is_on_floor():
-		velocity+=get_gravity() * delta
-
+	
 	if not ray_cast_y.is_colliding() and is_on_floor():
 		direction*=-1
 		scale.x=-scale.x
-
+		ray_cast_playerfinder.scale.x=-direction
+	elif velocity.x==0 and is_on_floor() and !animation_player.current_animation=="attack":
+		direction*=-1
+		scale.x=-scale.x
+		ray_cast_playerfinder.scale.x=-direction
 	
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-		
+	
+	
+	
 	if ray_cast_playerfinder.is_colliding() and animation_player.current_animation != "attack":
 		
 		if (ray_cast_playerfinder.get_collider().is_in_group("Player")):
 			
 			target_position=player.global_position
-		
+			if  player.global_position.x<global_position.x:
+				scale.x=1*side
+			elif player.global_position.x>global_position.x:
+				scale.x=-1.0*side
+			dir=scale.x
+			
 			animation_player.play("attack")
 		
-			
+	if not is_on_floor():
+		velocity += get_gravity() * delta
 	velocity.x = speed * direction
 	move_and_slide()
 	
@@ -111,7 +114,11 @@ func shoot_arrow() -> void:
 	
 
 func start_walk():
-	scale.x=-direction
+	
+	scale.x=dir
+	
+	ray_cast_playerfinder.scale.x=-direction
+	velocity.x = speed * direction
 	
 	animation_player.play("walk")
 

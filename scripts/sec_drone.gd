@@ -40,9 +40,7 @@ func _ready():
 	if GameState.dead_enemies.get(scene_name, {}).get(enemy_id,false):
 		queue_free()
 	
-	
-			
-	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	if HP<=0:

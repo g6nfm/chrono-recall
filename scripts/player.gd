@@ -1,30 +1,28 @@
 extends CharacterBody2D
 
 
-const SPEED = 130.0 
-const JUMP_VELOCITY = -300.0
-
-var has_double_jumped=false
-const DASHSPEED = 300
-var can_dash =true
-var HP=global.Base_HP
+const SPEED = 130.0 #move speed
+const JUMP_VELOCITY = -300.0 #jump height
+var has_double_jumped=false #boolean so player can only double jump
+const DASHSPEED = 300 #how fast the dash is 
+var can_dash =true #same as has_double_jumped but for air dashes
+var HP=global.Base_HP #HP, made the same as a varible in Player_pos_tracker 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D 
 
-@onready var coyote_timer: Timer = $Coyote_timer #for better/smoother jumpingd
-@onready var dash_timer: Timer = $Dash_timer
-@onready var invuln_timer: Timer = $invuln_timer
-@onready var camera_2d: Camera2D = $Camera2D
-
+@onready var coyote_timer: Timer = $Coyote_timer #for better/smoother jumping
+@onready var dash_timer: Timer = $Dash_timer #dash length
+@onready var invuln_timer: Timer = $invuln_timer #how long player is invinceible when hit
+@onready var camera_2d: Camera2D = $Camera2D 
 @onready var player: CharacterBody2D = $"."
 
 
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var attack: Area2D = $attack
+@onready var attack: Area2D = $attack #attack used to be seperate scene, merged as this caused a desync 
 
 
-@onready var state_machine = $AnimationTree["parameters/playback"]
+
 @onready var bar: Control = $timeshift/CanvasLayer/HP
 
 
@@ -103,7 +101,7 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_VELOCITY #can be changed via -/+ 
 			has_double_jumped=true
 			global.double_jump = true
-			state_machine.travel("Double-jump")
+			animation_tree.get("parameters/playback").travel("Double-jump")
 
 	elif is_on_floor():
 		has_double_jumped=false

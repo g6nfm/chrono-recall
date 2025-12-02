@@ -6,7 +6,8 @@ var direction = 1
 const firing_range=200
 var HP=2
 var flashing = false
-var startscale=scale.x
+var dir=0
+var side=1
 @onready var hitbox: Area2D = $hitbox
 
 @onready var timer: Timer = $Timer
@@ -27,9 +28,11 @@ var boltScene = preload("res://scenes/Enemies/bolt.tscn")
 func _ready():
 	if scale.x>0:
 		ray_cast_playerfinder.scale.x=-ray_cast_playerfinder.scale.x
+		
 		direction=1
 	elif scale.x<0:
 		direction=-1
+		side=-1
 	ray_cast_playerfinder.scale.x=-ray_cast_playerfinder.scale.x
 	randomize()  # Initialize random number generator
  
@@ -41,16 +44,12 @@ func _ready():
 	timer.start(length)
 	if enemy_id == "":
 		enemy_id=name
-
+		
 	scene_name = get_tree().current_scene.name
 	
 	if GameState.dead_enemies.get(scene_name, {}).get(enemy_id,false):
 		queue_free()
-	
-	
-			
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+
 func _physics_process(_delta: float) -> void:
 	
 	if HP<=0:
@@ -82,10 +81,10 @@ func _physics_process(_delta: float) -> void:
 			
 			target_position=player.global_position
 			if target_position.x<global_position.x:
-				animated_sprite_2d.scale.x=1
+				animated_sprite_2d.scale.x=-1*side
 				
 			elif target_position.x>global_position.x:
-				animated_sprite_2d.scale.x=1
+				animated_sprite_2d.scale.x=1*side
 			animation_player.play("attack")
 		
 			

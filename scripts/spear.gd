@@ -18,6 +18,11 @@ var direction = -1
 @export var enemy_id : String = ""
 @export var scene_name : String
 func _ready():
+	if scale.x<0:
+		direction=1
+	if scale.x>0:
+		direction=-1
+	
 	randomize()  # Initialize random number generator
  
 	var noise_texture = animated_sprite_2d.material.get("shader_parameter/Noise")
@@ -33,7 +38,7 @@ func _ready():
 	
 	if GameState.dead_enemies.get(scene_name, {}).get(enemy_id,false):
 		queue_free()
-	direction = -1
+	
 	
 			
 	
@@ -59,13 +64,18 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity+=get_gravity() * delta
 
+	
 	if not ray_cast_y.is_colliding() and is_on_floor():
 		direction*=-1
 		scale.x=-scale.x
-
-	velocity.x = speed * direction
+	elif velocity.x==0 and is_on_floor() and !animation_player.current_animation=="attack":
+		direction*=-1
+		scale.x=-scale.x
+	
+	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	velocity.x = speed * direction
 	move_and_slide()
 	
 func _on_playerdetector_body_entered(_body: Node2D) -> void:
@@ -81,6 +91,7 @@ func end_of_hit():
 	move_and_slide()
 	attackhitbox.monitoring = false
 func start_walk():
+	velocity.x = speed * direction
 	animation_player.play("walk")
 
 func _on_hitbox_area_entered(area: Area2D) -> void:

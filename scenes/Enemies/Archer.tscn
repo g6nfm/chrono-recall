@@ -271,7 +271,7 @@ _data = {
 &"walk": SubResource("Animation_mkrut")
 }
 
-[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_8qbab"]
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_h1jqy"]
 
 [node name="ARCHER" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 0
@@ -318,7 +318,7 @@ libraries = {
 speed_scale = 0.7
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimatedSprite2D/AnimationPlayer"]
-stream = SubResource("AudioStreamPolyphonic_8qbab")
+stream = SubResource("AudioStreamPolyphonic_h1jqy")
 volume_db = -5.0
 bus = &"sfx"
 
