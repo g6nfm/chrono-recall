@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://vnynytdlhgwd"]
+[gd_scene load_steps=28 format=3 uid="uid://vnynytdlhgwd"]
 
 [ext_resource type="Shader" uid="uid://baggp1nthtugs" path="res://scripts/Flash.gdshader" id="1_8k83v"]
 [ext_resource type="Script" uid="uid://b77y0m4eagxt2" path="res://scripts/archer.gd" id="1_cgghf"]
@@ -150,7 +150,7 @@ tracks/2/keys = {
 "start_offset": 0.2975,
 "stream": ExtResource("6_h1jqy")
 }],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0.033333335)
 }
 tracks/2/use_blend = true
 tracks/3/type = "value"
@@ -163,7 +163,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [24.0]
 }
 
 [sub_resource type="Animation" id="Animation_b380j"]
@@ -280,8 +280,6 @@ _data = {
 &"walk": SubResource("Animation_mkrut")
 }
 
-[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_d2nh3"]
-
 [node name="ARCHER" type="CharacterBody2D" groups=["Enemy"]]
 collision_layer = 0
 script = ExtResource("1_cgghf")
@@ -327,7 +325,7 @@ libraries = {
 speed_scale = 0.7
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimatedSprite2D/AnimationPlayer"]
-stream = SubResource("AudioStreamPolyphonic_d2nh3")
+volume_db = 24.0
 bus = &"sfx"
 
 [connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]
