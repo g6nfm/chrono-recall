@@ -23,7 +23,7 @@ func _ready():
 	var noise = noise_texture.noise
 	noise.seed = randi_range(0,10)
 	noise_texture.noise = noise 
-	print(noise.seed)
+	
 	if enemy_id == "":
 		enemy_id=name
 		

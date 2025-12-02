@@ -69,7 +69,7 @@ func _physics_process(_delta: float) -> void:
 	if animation_player.current_animation==("Idle"):
 		
 		var coin=rng.randi_range(1, 2)
-		print(coin)
+		
 		if coin==1:
 			animation_player.play("Wave")
 		else:

@@ -24,6 +24,7 @@ size = Vector2(16.5, 20.5)
 size = Vector2(44.5, 25)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nx1u4"]
+resource_local_to_scene = true
 shader = ExtResource("4_qlj30")
 shader_parameter/flash_amount = 0.0
 shader_parameter/Noise = ExtResource("5_nx1u4")
