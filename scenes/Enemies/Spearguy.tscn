@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dbnmylhndo1fv"]
+[gd_scene load_steps=35 format=3 uid="uid://dbnmylhndo1fv"]
 
 [ext_resource type="Script" uid="uid://btfyvsvew7gy3" path="res://scripts/spear.gd" id="1_qj3hu"]
 [ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="2_qw3lm"]
@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://dgsabuskap3ek" path="res://assets/sounds/officer death sound.mp3" id="7_3cgvs"]
 [ext_resource type="AudioStream" uid="uid://gja8mgwkqg1h" path="res://assets/sounds/Spear_attack.wav" id="8_dldk2"]
 [ext_resource type="AudioStream" uid="uid://cyfgrn3i4wyuh" path="res://assets/sounds/spear prepare attack sound.mp3" id="9_r8cal"]
-[ext_resource type="AudioStream" uid="uid://bi436kdhu0l3n" path="res://assets/sounds/spear walking sound.mp3" id="11_3cgvs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05wi8"]
 size = Vector2(30.5, 40.625)
@@ -187,6 +186,18 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0)
 }
 tracks/2/use_blend = true
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../AnimationPlayer/AudioStreamPlayer:volume_db")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_uc6kd"]
 resource_name = "attack"
@@ -255,6 +266,18 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.375)
 }
 tracks/3/use_blend = true
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../AnimationPlayer/AudioStreamPlayer:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.375, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [10.0, 20.0, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_nhlyx"]
 resource_name = "walk"
@@ -284,21 +307,6 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 4, 3, 2, 1]
 }
-tracks/2/type = "audio"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../AnimationPlayer/AudioStreamPlayer")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("11_3cgvs")
-}],
-"times": PackedFloat32Array(0)
-}
-tracks/2/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1t0ji"]
 _data = {
@@ -307,7 +315,7 @@ _data = {
 &"walk": SubResource("Animation_nhlyx")
 }
 
-[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_r8cal"]
+[sub_resource type="AudioStreamPolyphonic" id="AudioStreamPolyphonic_mep7c"]
 
 [node name="SPEAR" type="CharacterBody2D" groups=["Enemy"]]
 scale = Vector2(1.3, 1.3)
@@ -366,7 +374,7 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
-stream = SubResource("AudioStreamPolyphonic_r8cal")
+stream = SubResource("AudioStreamPolyphonic_mep7c")
 bus = &"sfx"
 
 [node name="hitbox" type="Area2D" parent="." groups=["Enemy"]]

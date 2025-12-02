@@ -63,7 +63,7 @@ func _physics_process(_delta: float) -> void:
 		return
 	
 	if  !playerdetector.get_overlapping_bodies().is_empty():
-		
+		cooldown.start(2)
 		animation_player.play("Stab")
 		
 	if animation_player.current_animation==("Idle"):

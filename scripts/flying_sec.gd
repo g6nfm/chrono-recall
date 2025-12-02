@@ -27,10 +27,11 @@ var boltScene = preload("res://scenes/Enemies/bolt.tscn")
 @export var scene_name : String
 func _ready():
 	if scale.x>0:
-		ray_cast_playerfinder.scale.x=-ray_cast_playerfinder.scale.x
+		
 		
 		direction=1
 	elif scale.x<0:
+		
 		direction=-1
 		side=-1
 	ray_cast_playerfinder.scale.x=-ray_cast_playerfinder.scale.x
@@ -137,6 +138,6 @@ func flash_white() -> void:
 
 func _on_timer_timeout() -> void:
 	direction*=-1
-	
+	ray_cast_playerfinder.scale.x=-ray_cast_playerfinder.scale.x
 	animated_sprite_2d.scale.x=-animated_sprite_2d.scale.x
 	timer.start(length)

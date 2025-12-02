@@ -961,7 +961,7 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationPlayer"]
-volume_db = -5.0
+volume_db = 10.0
 bus = &"sfx"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
