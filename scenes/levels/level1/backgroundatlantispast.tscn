@@ -23,6 +23,6 @@ repeat_times = 10
 [node name="AtlantisWaterTop" type="Sprite2D" parent="Parallax2D2"]
 z_index = -1
 texture_filter = 1
-position = Vector2(0, -278.99997)
+position = Vector2(0, -272.87)
 scale = Vector2(1.453, 1.453)
 texture = ExtResource("2_mbcv6")
