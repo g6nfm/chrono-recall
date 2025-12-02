@@ -940,6 +940,7 @@ offset_right = -240.0
 offset_bottom = -140.0
 
 [node name="Camera2D" parent="." instance=ExtResource("2_dqkch")]
+zoom = Vector2(3, 3)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -24.999989)
