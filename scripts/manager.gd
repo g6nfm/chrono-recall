@@ -12,7 +12,13 @@ var scene_name = ""
 func _ready():
 # Get the name of the root node
 	scene_name = get_tree().current_scene.get_name()
-
+	if scene_name=="gameF":
+		Atlantis.stream=load("res://assets/music/Wacky Workbench B mix - Sonic the Hedgehog CD [OST] - DeoxysPrime (youtube).mp3")
+		Atlantis.play()
+	elif !Atlantis.stream==load("res://assets/music/atlantis.mp3"):
+		Atlantis.stream=load("res://assets/music/atlantis.mp3")
+		Atlantis.play()
+	
 
 # Get the file path of the current scene
 
