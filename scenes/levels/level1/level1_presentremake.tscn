@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://5uci16aheaek"]
+[gd_scene load_steps=10 format=4 uid="uid://5uci16aheaek"]
 
 [ext_resource type="Script" uid="uid://5x0vr558bd45" path="res://scripts/manager.gd" id="1_gee14"]
 [ext_resource type="PackedScene" uid="uid://cn0cr5yemsoc7" path="res://scenes/Player/player.tscn" id="1_uwrxv"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://vnynytdlhgwd" path="res://scenes/Enemies/Archer.tscn" id="8_0g6s5"]
 [ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="8_j7wce"]
 [ext_resource type="PackedScene" uid="uid://dbnmylhndo1fv" path="res://scenes/Enemies/Spearguy.tscn" id="8_ps1cv"]
-[ext_resource type="AudioStream" uid="uid://bxw2bp60j0crv" path="res://assets/music/atlantis.mp3" id="9_7hti3"]
 [ext_resource type="PackedScene" uid="uid://dnqf3aho3oap" path="res://scenes/Enemies/Poseidon/Poseidon.tscn" id="9_gwoa7"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_0g6s5"]
@@ -22,10 +21,6 @@ script = ExtResource("1_gee14")
 
 [node name="Background Present" parent="." instance=ExtResource("7_bo65l")]
 position = Vector2(0, -10)
-
-[node name="Atlantis" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_7hti3")
-autoplay = true
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 physics_interpolation_mode = 1

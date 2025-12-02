@@ -240,4 +240,5 @@ position = Vector2(4557, -31)
 position = Vector2(2107, 845)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
+position = Vector2(9, 18)
 shape = SubResource("WorldBoundaryShape2D_8mokh")

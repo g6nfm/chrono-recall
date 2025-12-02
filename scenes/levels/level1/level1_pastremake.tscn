@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://cgk1y14c7tq7t"]
+[gd_scene load_steps=10 format=4 uid="uid://b0uiss5qbgn71"]
 
 [ext_resource type="Script" uid="uid://5x0vr558bd45" path="res://scripts/manager.gd" id="1_gee14"]
 [ext_resource type="TileSet" uid="uid://b18nsjpv0f36a" path="res://scenes/levels/level1/atlantispast.tres" id="5_67uaw"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://dnqf3aho3oap" path="res://scenes/Enemies/Poseidon/Poseidon.tscn" id="8_4scsf"]
 [ext_resource type="PackedScene" uid="uid://bk1byhl8kstn7" path="res://scenes/killzone.tscn" id="8_j7wce"]
 [ext_resource type="PackedScene" uid="uid://cn0cr5yemsoc7" path="res://scenes/Player/player.tscn" id="9_06myg"]
-[ext_resource type="AudioStream" uid="uid://bxw2bp60j0crv" path="res://assets/music/atlantis.mp3" id="9_7hti3"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7hti3"]
 
@@ -25,10 +24,6 @@ position = Vector2(72, 130)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="killzone"]
 position = Vector2(1, 60)
 shape = SubResource("WorldBoundaryShape2D_7hti3")
-
-[node name="Atlantis" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_7hti3")
-autoplay = true
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 physics_interpolation_mode = 1

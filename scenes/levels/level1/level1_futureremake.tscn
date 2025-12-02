@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://ca8y0jv3hea78"]
+[gd_scene load_steps=8 format=4 uid="uid://ca8y0jv3hea78"]
 
 [ext_resource type="Script" uid="uid://5x0vr558bd45" path="res://scripts/manager.gd" id="1_gee14"]
 [ext_resource type="TileSet" uid="uid://3aqdrfqipufm" path="res://scenes/levels/level1/atlantisfuture.tres" id="5_cquu5"]
@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dbnmylhndo1fv" path="res://scenes/Enemies/Spearguy.tscn" id="6_s1u80"]
 [ext_resource type="PackedScene" uid="uid://vnynytdlhgwd" path="res://scenes/Enemies/Archer.tscn" id="7_aifa8"]
 [ext_resource type="PackedScene" uid="uid://dnqf3aho3oap" path="res://scenes/Enemies/Poseidon/Poseidon.tscn" id="7_cquu5"]
-[ext_resource type="AudioStream" uid="uid://bxw2bp60j0crv" path="res://assets/music/atlantis.mp3" id="9_7hti3"]
 [ext_resource type="PackedScene" uid="uid://cn0cr5yemsoc7" path="res://scenes/Player/player.tscn" id="9_531i6"]
 
 [node name="game" type="Node2D"]
@@ -14,10 +13,6 @@
 [node name="Manager" type="Node" parent="."]
 unique_name_in_owner = true
 script = ExtResource("1_gee14")
-
-[node name="Atlantis" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_7hti3")
-autoplay = true
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
 physics_interpolation_mode = 1
