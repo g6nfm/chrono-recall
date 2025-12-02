@@ -1,7 +1,7 @@
-[gd_scene load_steps=8 format=4 uid="uid://ca0bitk6wupp5"]
+[gd_scene load_steps=8 format=4 uid="uid://ce1ogacvlbdap"]
 
 [ext_resource type="Script" uid="uid://5x0vr558bd45" path="res://scripts/manager.gd" id="1_gee14"]
-[ext_resource type="TileSet" uid="uid://ijiiyransvc5" path="res://scenes/levels/level1/facility.tres" id="2_aba0w"]
+[ext_resource type="TileSet" uid="uid://ijiiyransvc5" path="res://scenes/levels/Level0/facility.tres" id="2_aba0w"]
 [ext_resource type="PackedScene" uid="uid://cdsa35jjs57cp" path="res://scenes/Enemies/FLying_sec.tscn" id="3_4wb0m"]
 [ext_resource type="PackedScene" uid="uid://dgrsxff0l4mna" path="res://scenes/Enemies/Sec_Drone.tscn" id="4_4wb0m"]
 [ext_resource type="PackedScene" uid="uid://cn0cr5yemsoc7" path="res://scenes/Player/player.tscn" id="4_8yss7"]
@@ -72,7 +72,6 @@ scale = Vector2(-0.07, 0.07)
 light_mask = 0
 position = Vector2(389, 154.00002)
 rotation = 0.009602181
-scale = Vector2(0.07, 0.07)
 
 [node name="Flying_sec6" parent="." instance=ExtResource("3_4wb0m")]
 light_mask = 0
@@ -90,7 +89,6 @@ scale = Vector2(-0.07, 0.07)
 light_mask = 0
 position = Vector2(874.00006, 76)
 rotation = 0.009602181
-scale = Vector2(0.07, 0.07)
 
 [node name="Flying_sec10" parent="." instance=ExtResource("3_4wb0m")]
 light_mask = 0
@@ -142,7 +140,6 @@ position = Vector2(1674.0001, 345)
 light_mask = 0
 position = Vector2(2064, 94.00003)
 rotation = 0.009602181
-scale = Vector2(0.07, 0.07)
 
 [node name="R2D7" parent="." instance=ExtResource("4_4wb0m")]
 z_index = 1
@@ -227,4 +224,3 @@ position = Vector2(3381, 114)
 
 [node name="player" parent="." instance=ExtResource("4_8yss7")]
 position = Vector2(-155, 23)
-scale = Vector2(0.07, 0.07)
